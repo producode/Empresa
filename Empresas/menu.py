@@ -1,6 +1,5 @@
 from datetime import datetime
 from datetime import date
-from Empresas.clases.__init__
 from Empresas.clases.empresa import empresas
 from Empresas.clases.fabricante import fabricantes
 from Empresas.clases.categoria import categorias
@@ -223,7 +222,8 @@ while seguir:
                 i = i + 1
             for item in empresas[i].Compras:
                 print("ID: ", item.idCompra, " Fecha: ", item.Fecha," Precio: ",item.Precio, " Material: ", item.material.Nombre, " Cantidad: ", item.Cantidad)
-    elif opcion == "4":        print("elija una opcion")
+    elif opcion == "4":
+        print("elija una opcion")
         print("0: ver lista de empresas")
         print("1: ver lista de fabricantes")
         print("2: ingresar un fabricante")
