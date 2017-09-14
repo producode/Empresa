@@ -226,10 +226,12 @@ while seguir:
         print("elija una opcion")
         print("0: ver lista de empresas")
         print("1: ver lista de fabricantes")
-        print("2: ingresar un fabricante")
-        print("3: borrar un fabricante")
-        print("4: agregar un materia")
-        print("5: cambiar precio de material")
+        print("2: ver lista de materiales")
+        print("3: ingresar un fabricante")
+        print("4: borrar un fabricante")
+        print("5: agregar un materia")
+        print("6: cambiar precio de material")
+        print("7: eliminar un material")
         opcion4 = input()
         if opcion4 == "0":
             for item in empresa:
@@ -242,12 +244,23 @@ while seguir:
             print("presione enter para continuar")
             a = input()
         elif opcion4 == "2":
+            i = 0
+            elegirFabricante = input("ingrese abreviatura del fabricante: ")
+            for item in fabbricantes:
+                if item.Abreviatura == elegirFabricante:
+                    break
+                i = i + 1
+            print("lista de materiales del fabricante")
+            for item2 in fabbricantes[i].materiale:
+                print("nombre: ", item2.Nombre, " precio: ", item2.Precio, " unidad de medicion: ",item2.UnidadMedicion)
+            i = input("presione enter para continuar")
+        elif opcion4 == "3":
             nuevoFabricante = fabricantes()
             nuevoFabricante.Nombre = input("ingrese el nombre: ")
             nuevoFabricante.Rublo = input("ingrese el rublo: ")
             nuevoFabricante.Abreviatura = input("ingrese la abreviatura: ")
             fabbricantes.append(nuevoFabricante)
-        elif opcion4 == "3":
+        elif opcion4 == "4":
             elegirFabricante = input("ingrese la abreviatura del fabricante: ")
             i = 0
             encuentro = True
@@ -259,7 +272,7 @@ while seguir:
                 i = i + 1
             if encuentro:
                 i = input("no se encontro al fabricante. Presione enter para seguir")
-        elif opcion4 == "4":
+        elif opcion4 == "5":
             elegirFabricante = input("ingrese la abreviatura del fabricante: ")
             i = 0
             encuentro = True
@@ -275,7 +288,39 @@ while seguir:
                 precio = int(input("ingrese el precio del nuevo material: "))
                 um = input("ingrese la unidad de medicion del nuevo material: ")
                 fabbricantes[i].crearMaterial(nombre,precio,um)
-                
+        elif opcion4 == "6":
+            elegirFabricante = input("ingrese la abreviatura del fabricante del material: ")
+            i = 0
+            for o in fabbricantes:
+                if o.Abreviatura == elegirFabricante:
+                    break
+                i = i + 1
+            print("lista de materiales del fabricante")
+            for item2 in fabbricantes[i].materiale:
+                print("nombre: ", item2.Nombre, " precio: ", item2.Precio, " unidad de medicion: ",item2.UnidadMedicion)
+            elegirMaterial = input("ingrese el nombre del material: ")
+            for item2 in fabbricantes[i].materiale:
+                if item2.Nombre == elegirMaterial:
+                    item2.Precio = int(input("ingrese el nuevo precio: "))
+        elif opcion4 == "7":
+            elegirFabricante = input("ingrese la abreviatura del fabricante del material: ")
+            i = 0
+            for o in fabbricantes:
+                if o.Abreviatura == elegirFabricante:
+                    break
+                i = i + 1
+            print("lista de materiales del fabricante")
+            for item2 in fabbricantes[i].materiale:
+                print("nombre: ", item2.Nombre, " precio: ", item2.Precio, " unidad de medicion: ",
+                      item2.UnidadMedicion)
+            elegirMaterial = input("ingrese el nombre del material: ")
+            o = 0
+            for item2 in fabbricantes[i].materiale:
+                if item2.Nombre == elegirMaterial:
+                    break
+                o = o + 1
+            del fabbricantes[i].materiale[o]
+
     elif opcion == "5":
         print("elija una opcion")
         print("0: ver lista de empresas")
