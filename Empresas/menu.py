@@ -257,6 +257,7 @@ while seguir:
                     break
                 i = i + 1
             if encuentro:
+                i = input("no se encontro al fabricante. Presione enter para seguir")
                 
     elif opcion == "5":
         print("elija una opcion")
