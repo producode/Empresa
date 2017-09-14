@@ -206,13 +206,13 @@ while seguir:
             print("lista de materiales del fabricante")
             for item2 in fabbricantes[i].materiale:
                 print("nombre: ",item2.Nombre, " precio: ", item2.Precio, " unidad de medicion: ", item2.UnidadMedicion)
-            elegirMaterial = input("ingrese el nombre del material")
+            elegirMaterial = input("ingrese el nombre del material: ")
             for item2 in fabbricantes[i].materiale:
                 if item2.Nombre == elegirMaterial:
                     nuevaCompra.material = item2
-                    nuevaCompra.cantidad = input("ingrese la cantidad de la compra: ")
-                    nuevaCompra.Precio = input("ingrese el precio de la compra: ")
-                    empresa[i].agregarCompra = nuevaCompra
+                    nuevaCompra.cantidad = int(input("ingrese la cantidad de la compra: "))
+                    nuevaCompra.Precio = (nuevaCompra.cantidad * nuevaCompra.material.Precio)
+                    empresa[i].agregarCompra(nuevaCompra)
         elif opcion3 == "2":
             empresaAbreviatura = input("ingrese la abreviatura de la empresa: ")
             i = 0
@@ -220,8 +220,8 @@ while seguir:
                 if o.Abreviatura == empresaAbreviatura:
                     break
                 i = i + 1
-            for item in empresas[i].Compras:
-                print("ID: ", item.idCompra, " Fecha: ", item.Fecha," Precio: ",item.Precio, " Material: ", item.material.Nombre, " Cantidad: ", item.Cantidad)
+            for item in empresa[i].Compras:
+                print("ID: ", item.idCompra, " Fecha: ", item.Fecha," Precio: ",item.Precio, " Material: ", item.material.Nombre, " Cantidad: ", item.cantidad)
     elif opcion == "4":
         print("elija una opcion")
         print("0: ver lista de empresas")
@@ -243,11 +243,12 @@ while seguir:
             a = input()
         elif opcion4 == "2":
             nuevoFabricante = fabricantes()
-            nuevoFabricante.Nombre = input("ingrese el nombre:")
+            nuevoFabricante.Nombre = input("ingrese el nombre: ")
             nuevoFabricante.Rublo = input("ingrese el rublo: ")
             nuevoFabricante.Abreviatura = input("ingrese la abreviatura: ")
+            fabbricantes.append(nuevoFabricante)
         elif opcion4 == "3":
-            elegirFabricante = input("ingrese la abreviatura del fabricante")
+            elegirFabricante = input("ingrese la abreviatura del fabricante: ")
             i = 0
             encuentro = True
             for o in fabbricantes:
@@ -258,6 +259,22 @@ while seguir:
                 i = i + 1
             if encuentro:
                 i = input("no se encontro al fabricante. Presione enter para seguir")
+        elif opcion4 == "4":
+            elegirFabricante = input("ingrese la abreviatura del fabricante: ")
+            i = 0
+            encuentro = True
+            for o in fabbricantes:
+                if o.Abreviatura == elegirFabricante:
+                    encuentro = False
+                    break
+                i = i + 1
+            if encuentro:
+                i = input("no se encontro al fabricante. Presione enter para seguir")
+            else:
+                nombre = input("ingrese el nombre del nuevo material: ")
+                precio = int(input("ingrese el precio del nuevo material: "))
+                um = input("ingrese la unidad de medicion del nuevo material: ")
+                fabbricantes[i].crearMaterial(nombre,precio,um)
                 
     elif opcion == "5":
         print("elija una opcion")
