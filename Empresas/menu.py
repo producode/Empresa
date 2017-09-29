@@ -6,7 +6,21 @@ from Empresas.clases.categoria import categorias
 from Empresas.clases.empleado import empleados
 from Empresas.clases.accionista import accionistas
 from Empresas.clases.compra import compras
-import time
+from flask import Flask
+from flask import render_template
+from flask import request
+app = Flask(__name__)
+@app.route('/')
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        print (request.form['empresaNombre'])
+        print(request.form['empresaRublo'])
+        print(request.form['empresaAbreviatura'])
+    return render_template('pagina\EmpresaInsert\AgregarEmpresa.html',
+                           title='Sign In')
+app.run(debug=True)
+
 
 empresa = []
 fabbricantes = []
