@@ -14,10 +14,8 @@ app = Flask(__name__)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        print (request.form['empresaNombre'])
-        print(request.form['empresaRublo'])
-        print(request.form['empresaAbreviatura'])
-    return render_template('pagina\EmpresaInsert\AgregarEmpresa.html',
+        print(request.form['empresaNombre'])
+    return render_template('AgregarEmpresa.html',
                            title='Sign In')
 app.run(debug=True)
 
