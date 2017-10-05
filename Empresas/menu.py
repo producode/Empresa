@@ -6,47 +6,40 @@ from Empresas.clases.categoria import categorias
 from Empresas.clases.empleado import empleados
 from Empresas.clases.accionista import accionistas
 from Empresas.clases.compra import compras
+from Empresas.clases.usuario import usuarios
 from flask import Flask
 from flask import render_template
 from flask import request
 
-
-def agregarEmpresas(nombre, rublo, abreviatura):
-    empresaNueva = empresas
-    empresaNueva.Nombre = nombre
-    empresaNueva.Rublo = rublo
-    empresaNueva.Abreviatura = abreviatura
-    empresa.append(empresaNueva)
-
-
-def agregarFabricante(nombre, rublo):
-    fabricanteNuevo = fabricantes
-    fabricanteNuevo.Nombre = nombre
-    fabricanteNuevo.Rublo = rublo
-
-
-def eliminarFabricante(abreviatura):
-    i = 0
-    for o in fabbricantes:
-        if o.Abreviatura == abreviatura:
-            del fabbricantes[i]
-            break
-        i = i + 1
-
-
-def agregarCategoria(nombre):
-    categoriaNueva = categorias()
-    categoriaNueva.nombre = nombre
-    categoriaNueva.idCategoria = len(categoriaLista) + 1
-
-
-
+empresa = []
+fabbricantes = []
+categoriaLista = []
+cliente = []
+abrUniversal = ""
 app = Flask(__name__)
 @app.route('/')
 @app.route('/principal', methods=['GET', 'POST'])
 def principal():
     return render_template('principal.html',
                            title='Sign In')
+@app.route('/')
+@app.route('/ingresar', methods=['GET', 'POST'])
+def ingresar():
+    if request.method == 'POST':
+        for item in cliente:
+            if(request.form['nicknameUsuario'] == item.nickname and request.form['password'] == item.contrasena):
+                abrUniversal = item.empresaAsociada
+    return render_template('ingreso.html')
+@app.route('/')
+@app.route('/registrarse', methods=['GET', 'POST'])
+def registrarse():
+    if request.method == 'POST':
+        nuevoUsuario = usuarios()
+        nuevoUsuario.nickname = request.form['nicknameUsuario']
+        nuevoUsuario.contrasena = request.form['password']
+        nuevoUsuario.empresaAsociada = request.form['abreviatura']
+        cliente.append(nuevoUsuario)
+    return render_template('registrarse.html')
 @app.route('/')
 @app.route('/finanzasMenu', methods=['GET', 'POST'])
 def finanzasMenu():
@@ -82,12 +75,13 @@ def ingresarEmpresa():
         empresa.append(nuevaEmpresa)
     return render_template('AgregarEmpresa.html',
                            title='Sign In')
+@app.route('/')
+@app.route('/listarEmpresas', methods=['GET','POST'])
+def listarEmpresas():
+    return render_template("listarEmpresas.html",
+                           title='Home',
+                           posts=empresa)
 app.run(debug=True)
-
-
-empresa = []
-fabbricantes = []
-categoriaLista = []
 
 print("--Bienvenido--")
 print("")
@@ -139,6 +133,7 @@ while seguir:
             print("presione enter para continuar")
             a = input()
         elif opcion2 == "1":
+            a = a +1
         elif opcion2 == "2":
             empresaAbreviatura = input("ingrese la abreviatura de la empresa: ")
             i = 0
