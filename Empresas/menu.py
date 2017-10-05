@@ -9,12 +9,77 @@ from Empresas.clases.compra import compras
 from flask import Flask
 from flask import render_template
 from flask import request
+
+
+def agregarEmpresas(nombre, rublo, abreviatura):
+    empresaNueva = empresas
+    empresaNueva.Nombre = nombre
+    empresaNueva.Rublo = rublo
+    empresaNueva.Abreviatura = abreviatura
+    empresa.append(empresaNueva)
+
+
+def agregarFabricante(nombre, rublo):
+    fabricanteNuevo = fabricantes
+    fabricanteNuevo.Nombre = nombre
+    fabricanteNuevo.Rublo = rublo
+
+
+def eliminarFabricante(abreviatura):
+    i = 0
+    for o in fabbricantes:
+        if o.Abreviatura == abreviatura:
+            del fabbricantes[i]
+            break
+        i = i + 1
+
+
+def agregarCategoria(nombre):
+    categoriaNueva = categorias()
+    categoriaNueva.nombre = nombre
+    categoriaNueva.idCategoria = len(categoriaLista) + 1
+
+
+
 app = Flask(__name__)
 @app.route('/')
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/principal', methods=['GET', 'POST'])
+def principal():
+    return render_template('principal.html',
+                           title='Sign In')
+@app.route('/')
+@app.route('/finanzasMenu', methods=['GET', 'POST'])
+def finanzasMenu():
+    return render_template('FinanzasMenu.html')
+@app.route('/')
+@app.route('/empresasMenu', methods=['GET', 'POST'])
+def empresasMenu():
+    return render_template('EmpresasMenu.html')
+@app.route('/')
+@app.route('/comprasMenu', methods=['GET', 'POST'])
+def comprasMenu():
+    return render_template('ComprasMenu.html')
+@app.route('/')
+@app.route('/materialesMenu', methods=['GET', 'POST'])
+def materialesMenu():
+    return render_template('MaterialesMenu.html')
+@app.route('/')
+@app.route('/productosMenu', methods=['GET', 'POST'])
+def productosMenu():
+    return render_template('ProductosMenu.html')
+@app.route('/')
+@app.route('/pedidosMenu', methods=['GET', 'POST'])
+def pedidosMenu():
+    return render_template('PedidosMenu.html')
+@app.route('/')
+@app.route('/ingresarEmpresa', methods=['GET', 'POST'])
+def ingresarEmpresa():
     if request.method == 'POST':
-        print(request.form['empresaNombre'])
+        nuevaEmpresa = empresas()
+        nuevaEmpresa.Nombre = request.form['empresaNombre']
+        nuevaEmpresa.Rublo = request.form['empresaRublo']
+        nuevaEmpresa.Abreviatura = request.form['empresaAbreviatura']
+        empresa.append(nuevaEmpresa)
     return render_template('AgregarEmpresa.html',
                            title='Sign In')
 app.run(debug=True)
@@ -37,6 +102,7 @@ while seguir:
     print("6: PEDIDOS")
     print("7: SALIR")
     opcion = input()
+
     if opcion == "1":
         print("elija una opcion")
         print("0: ver lista de empresas")
@@ -73,11 +139,6 @@ while seguir:
             print("presione enter para continuar")
             a = input()
         elif opcion2 == "1":
-            nuevaEmpresa = empresas()
-            nuevaEmpresa.Nombre = input("Ingrese nombre de la empresa: ")
-            nuevaEmpresa.Rublo = input("Ingrese rublo de la empresa: ")
-            nuevaEmpresa.Abreviatura = input("Ingrese abreviatura de la empresa: ")
-            empresa.append(nuevaEmpresa)
         elif opcion2 == "2":
             empresaAbreviatura = input("ingrese la abreviatura de la empresa: ")
             i = 0
@@ -352,28 +413,5 @@ while seguir:
     elif opcion == "7":
         seguir = False
 
-def agregarEmpresas(nombre,rublo,abreviatura):
-    empresaNueva = empresas
-    empresaNueva.Nombre = nombre
-    empresaNueva.Rublo = rublo
-    empresaNueva.Abreviatura = abreviatura
-    empresa.append(empresaNueva)
 
-def agregarFabricante(nombre,rublo):
-    fabricanteNuevo = fabricantes
-    fabricanteNuevo.Nombre = nombre
-    fabricanteNuevo.Rublo = rublo
-
-def eliminarFabricante(abreviatura):
-    i = 0
-    for o in fabbricantes:
-        if o.Abreviatura == abreviatura:
-            del fabbricantes[i]
-            break
-        i = i + 1
-
-def agregarCategoria(nombre):
-    categoriaNueva = categorias()
-    categoriaNueva.nombre = nombre
-    categoriaNueva.idCategoria = len(categoriaLista) + 1
 

@@ -1,9 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Pedidos</title>
+<style>
+body {
+  margin: 0 auto;
+  background-color: powderblue;
+  padding: 0 20px 20px 20px;
+}h1 {
+    color: blue;
+    font-family: verdana;
+    font-size: 300%;
+    text-align: center;
+}
+input {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+th {
+	color: green;
+	text-align: center;
+}
+</style>
 </head>
 <body>
-	<h1>Pedidos</h1>
+<center>
+<table>
+	<tr>
+		<th><form action="/listarPedidos">
+			    <input type="submit" value="Ver pedidos" />
+			</form>
+		</th>
+		<th><form action="/insertarPedido">
+			    <input type="submit" value="Agregar pedido" />
+			</form>
+		</th>
+		<th><form action="/eliminarPedido">
+			    <input type="submit" value="Borrar pedido" />
+			</form>
+		</th>
+	</tr>
+</table>
+</center><table>
+</table>
+
 </body>
 </html>

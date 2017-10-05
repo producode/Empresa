@@ -1,9 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Productos</title>
+<style>
+body {
+  margin: 0 auto;
+  background-color: powderblue;
+  padding: 0 20px 20px 20px;
+}h1 {
+    color: blue;
+    font-family: verdana;
+    font-size: 300%;
+    text-align: center;
+}
+input {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+th {
+	color: green;
+	text-align: center;
+}
+</style>
 </head>
 <body>
-	<h1>Productos</h1>
+<center>
+<table>
+	<tr>
+		<th><form action="/ingresarProducto">
+			    <input type="submit" value="Agregar producto" />
+			</form>
+		</th>
+		<th><form action="/modificarProducto">
+			    <input type="submit" value="Modificar producto" />
+			</form>
+		</th>
+		<th><form action="/eliminarProducto">
+			    <input type="submit" value="Borrar producto" />
+			</form>
+		</th>
+	</tr>
+	<tr>
+		<th><form action="/insertarCategoria">
+			    <input type="submit" value="Agregar categoria" />
+			</form>
+		</th>
+		<th><form action="/eliminarCategoria">
+			    <input type="submit" value="Borrar categoria" />
+			</form>
+		</th>
+	</tr>
+</table>
+</center><table>
+</table>
+
 </body>
 </html>

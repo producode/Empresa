@@ -1,9 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Finanzas</title>
+<style>
+body {
+  margin: 0 auto;
+  background-color: powderblue;
+  padding: 0 20px 20px 20px;
+}h1 {
+    color: blue;
+    font-family: verdana;
+    font-size: 300%;
+    text-align: center;
+}
+input {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+th {
+	color: green;
+	text-align: center;
+}
+</style>
 </head>
 <body>
-	<h1>Finanzas</h1>
+<center>
+<table>
+	<tr>
+		<th><form action="/calcularMensual">
+			    <input type="submit" value="ganancias mensuales" />
+			</form>
+		</th>
+		<th><form action="/calcularGeneral">
+			    <input type="submit" value="ganancias generales" />
+			</form>
+		</th>
+		<th><form action="/listarHistorial">
+			    <input type="submit" value="historial" />
+			</form>
+		</th>
+	</tr>
+	<tr>
+		<th><form action="/calcularAhorro">
+			    <input type="submit" value="Ver caja de ahorros" />
+			</form>
+		</th>
+		<th><form action="/calcularAccion">
+			    <input type="submit" value="dividendos por accion" />
+			</form>
+		</th>
+		<th><form action="/calcularAccionista">
+			    <input type="submit" value="dividendos por accionista" />
+			</form>
+		</th>
+	</tr>
+	<tr>
+		<th><form action="/calcularPorcentaje">
+			    <input type="submit" value="porcentaje por accionista" />
+			</form>
+		</th>
+		<th><form action="/eliminarEmpleado">
+			    <input type="submit" value="Eliminar empleado" />
+			</form>
+		</th>
+		<th><form action="/modificarAccionista">
+			    <input type="submit" value="Cambiar nro de acciones" />
+			</form>
+		</th>
+		<th><form action="/eliminarAccionista">
+			    <input type="submit" value="Eliminar accionista" />
+			</form>
+		</th>
+	</tr>
+</table>
+</center><table>
+</table>
+
 </body>
 </html>
