@@ -20,8 +20,7 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/principal', methods=['GET', 'POST'])
 def principal():
-    return render_template('principal.html',
-                           title='Sign In')
+    return render_template('principal.html')
 @app.route('/')
 @app.route('/ingresar', methods=['GET', 'POST'])
 def ingresar():
