@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87cef4c2-6218-4043-b459-85084c857e0c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Empresas/templates/ingresarAccionista.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Empresas/menu.py" afterPath="$PROJECT_DIR$/Empresas/menu.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Empresas/templates/AgregarEmpresa.html" afterPath="$PROJECT_DIR$/Empresas/templates/AgregarEmpresa.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Empresas/templates/ingresarEmpleado.html" afterPath="$PROJECT_DIR$/Empresas/templates/ingresarEmpleado.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +16,8 @@
       <file leaf-file-name="menu.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Empresas/menu.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="36" column="49" lean-forward="true" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
+            <state relative-caret-position="142">
+              <caret line="39" column="15" lean-forward="false" selection-start-line="39" selection-start-column="15" selection-end-line="39" selection-end-column="15" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -340,7 +336,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507557831590</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="se agregaron funciones para facilitar el uso">
+      <created>1507560126958</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1507560126958</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -373,7 +376,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="se modificaron los template y se agrego la pagina" />
     <MESSAGE value="se agrego la pagina inicio y ingresarEmpleado con sus respectivas solicitudes en el menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="se agrego la pagina inicio y ingresarEmpleado con sus respectivas solicitudes en el menu" />
+    <MESSAGE value="se agregaron funciones para facilitar el uso" />
+    <option name="LAST_COMMIT_MESSAGE" value="se agregaron funciones para facilitar el uso" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -709,8 +713,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Empresas/menu.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="36" column="49" lean-forward="true" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
+        <state relative-caret-position="142">
+          <caret line="39" column="15" lean-forward="false" selection-start-line="39" selection-start-column="15" selection-end-line="39" selection-end-column="15" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
