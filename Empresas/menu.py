@@ -16,6 +16,18 @@ fabbricantes = []
 categoriaLista = []
 cliente = []
 abrUniversal = ""
+
+def ingresarEmpresa2(nombre,rublo,abreviatura):
+    nuevaEmpresa = empresas()
+    nuevaEmpresa.Nombre = nombre
+    nuevaEmpresa.Rublo = rublo
+    nuevaEmpresa.Abreviatura = abreviatura
+    empresa.append(nuevaEmpresa)
+def ingresar2(nickname,password):
+    for item in cliente:
+        if(nickname == item.nickname and password == item.contrasena):
+            abrUniversal = item.empresaAsociada
+
 app = Flask(__name__)
 @app.route('/')
 @app.route('/inicio', methods=['GET', 'POST'])
@@ -29,9 +41,7 @@ def principal():
 @app.route('/ingresar', methods=['GET', 'POST'])
 def ingresar():
     if request.method == 'POST':
-        for item in cliente:
-            if(request.form['nicknameUsuario'] == item.nickname and request.form['password'] == item.contrasena):
-                abrUniversal = item.empresaAsociada
+        ingresar2(request.form['nicknameUsuario'],request.form['password'])
     return render_template('ingreso.html')
 @app.route('/')
 @app.route('/registrarse', methods=['GET', 'POST'])
@@ -71,11 +81,7 @@ def pedidosMenu():
 @app.route('/ingresarEmpresa', methods=['GET', 'POST'])
 def ingresarEmpresa():
     if request.method == 'POST':
-        nuevaEmpresa = empresas()
-        nuevaEmpresa.Nombre = request.form['empresaNombre']
-        nuevaEmpresa.Rublo = request.form['empresaRublo']
-        nuevaEmpresa.Abreviatura = request.form['empresaAbreviatura']
-        empresa.append(nuevaEmpresa)
+        ingresarEmpresa2(request.form['empresaNombre'],request.form['empresaRublo'],request.form['empresaAbreviatura'])
     return render_template('AgregarEmpresa.html',
                            title='Sign In')
 @app.route('/')
@@ -430,6 +436,3 @@ while seguir:
         opcion6 = input()
     elif opcion == "7":
         seguir = False
-
-
-

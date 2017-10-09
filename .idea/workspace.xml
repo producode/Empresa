@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87cef4c2-6218-4043-b459-85084c857e0c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Empresas/templates/ingresarAccionista.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Empresas/menu.py" afterPath="$PROJECT_DIR$/Empresas/menu.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Empresas/templates/AgregarEmpresa.html" afterPath="$PROJECT_DIR$/Empresas/templates/AgregarEmpresa.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Empresas/templates/ingresarEmpleado.html" afterPath="$PROJECT_DIR$/Empresas/templates/ingresarEmpleado.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,8 +20,8 @@
       <file leaf-file-name="menu.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Empresas/menu.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="102" column="61" lean-forward="false" selection-start-line="102" selection-start-column="61" selection-end-line="102" selection-end-column="61" />
+            <state relative-caret-position="91">
+              <caret line="36" column="49" lean-forward="true" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -25,11 +29,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ingresarAccionista.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Empresas/templates/ingresarAccionista.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="50" column="68" lean-forward="false" selection-start-line="50" selection-start-column="68" selection-end-line="50" selection-end-column="68" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="inicio.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Empresas/templates/inicio.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="33" column="28" lean-forward="false" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
+            <state relative-caret-position="312">
+              <caret line="27" column="1" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="27" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -38,8 +52,8 @@
       <file leaf-file-name="ingresarEmpleado.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Empresas/templates/ingresarEmpleado.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+            <state relative-caret-position="204">
+              <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -98,8 +112,8 @@
       <file leaf-file-name="AgregarEmpresa.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Empresas/templates/AgregarEmpresa.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="40" column="17" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="43" selection-end-column="11" />
+            <state relative-caret-position="346">
+              <caret line="37" column="5" lean-forward="false" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -132,10 +146,11 @@
         <option value="$PROJECT_DIR$/Empresas/templates/listarEmpresas.html" />
         <option value="$PROJECT_DIR$/Empresas/templates/inicio.html" />
         <option value="$PROJECT_DIR$/Empresas/templates/EmpresasMenu.html" />
-        <option value="$PROJECT_DIR$/Empresas/templates/AgregarEmpresa.html" />
         <option value="$PROJECT_DIR$/Empresas/templates/agregarEmpleado.html" />
-        <option value="$PROJECT_DIR$/Empresas/menu.py" />
         <option value="$PROJECT_DIR$/Empresas/templates/ingresarEmpleado.html" />
+        <option value="$PROJECT_DIR$/Empresas/templates/AgregarEmpresa.html" />
+        <option value="$PROJECT_DIR$/Empresas/templates/ingresarAccionista.html" />
+        <option value="$PROJECT_DIR$/Empresas/menu.py" />
       </list>
     </option>
   </component>
@@ -318,7 +333,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507557780931</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="se agrego la pagina inicio y ingresarEmpleado con sus respectivas solicitudes en el menu">
+      <created>1507557831590</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1507557831590</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -456,6 +478,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="19" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -608,6 +631,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="19" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -635,14 +659,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Empresas/templates/AgregarEmpresa.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="40" column="17" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="43" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Empresas/templates/agregarEmpleado.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -659,26 +675,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Empresas/templates/ingresarEmpleado.html">
+    <entry file="file://$PROJECT_DIR$/Empresas/templates/inicio.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+        <state relative-caret-position="312">
+          <caret line="27" column="1" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="27" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Empresas/templates/inicio.html">
+    <entry file="file://$PROJECT_DIR$/Empresas/templates/AgregarEmpresa.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="33" column="28" lean-forward="false" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
+        <state relative-caret-position="346">
+          <caret line="37" column="5" lean-forward="false" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Empresas/templates/ingresarEmpleado.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Empresas/templates/ingresarAccionista.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="50" column="68" lean-forward="false" selection-start-line="50" selection-start-column="68" selection-end-line="50" selection-end-column="68" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Empresas/menu.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="102" column="61" lean-forward="false" selection-start-line="102" selection-start-column="61" selection-end-line="102" selection-end-column="61" />
+        <state relative-caret-position="91">
+          <caret line="36" column="49" lean-forward="true" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>

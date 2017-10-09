@@ -38,28 +38,23 @@ table {
 	}
 </style>
 </head>
-<h1>agregar empresa</h1>
+<h1>Agregar accionista</h1>
     <form action="/ingresarEmpresa" method="post" name="login">
     	<table>
     		<tr>
     			<th><center><p aling = "center">nombre</p></center></th>
-    			<th><input type="text" value="" id="empresaNombre" name="empresaNombre"></p>
+    			<th><input type="text" value="" id="nombre" name="nombre"></p>
     			</th>
     		</tr>
 			<tr>
-    			<th><center><p aling = "center">rublo</p></center></th>
-    			<th><input type="text" value="" id="empresaRublo" name="empresaRublo"></p>
-    			</th>
-    		</tr>
-			<tr>
-    			<th><center><p aling = "center">abreviatura</p></center></th>
-    			<th><input type="text" value="" id="empresaAbreviatura" name="empresaAbreviatura"></p>
+    			<th><center><p aling = "center">cantidad de acciones</p></center></th>
+    			<th><input type="text" value="" id="cantidadAcciones" name="cantidadAcciones"></p>
     			</th>
     		</tr>
     	</table>
-        <input type="submit" value="subir">
-		<table>
+        <table>
 			<tr>
+				<th><input type="submit" value="subir"></th>
 				<th>
 					<form action="/principal">
 						<input type="submit" value="volver" />
