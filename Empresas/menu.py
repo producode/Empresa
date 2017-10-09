@@ -27,6 +27,28 @@ def ingresar2(nickname,password):
     for item in cliente:
         if(nickname == item.nickname and password == item.contrasena):
             abrUniversal = item.empresaAsociada
+def registrarse2(nickname,password,empresasociada):
+    nuevoUsuario = usuarios()
+    nuevoUsuario.nickname = nickname
+    nuevoUsuario.contrasena = password
+    nuevoUsuario.empresaAsociada = empresasociada
+    cliente.append(nuevoUsuario)
+def ingresarEmpleado2(nombre,profesion,superior,sueldo):
+    i = 0
+    a = False
+    for o in empresa:
+        if o.Abreviatura == abrUniversal:
+            a = True
+            break
+        i = i + 1
+    if a == True:
+        nuevoEmpleado = empleados()
+        nuevoEmpleado.nombre = nombre
+        nuevoEmpleado.fechaIngreso = datetime.now()
+        nuevoEmpleado.Profesion = profesion
+        nuevoEmpleado.superior = superior
+        nuevoEmpleado.sueldo = sueldo
+        empresa[i].agregarEmpleado(nuevoEmpleado)
 
 app = Flask(__name__)
 @app.route('/')
@@ -47,11 +69,7 @@ def ingresar():
 @app.route('/registrarse', methods=['GET', 'POST'])
 def registrarse():
     if request.method == 'POST':
-        nuevoUsuario = usuarios()
-        nuevoUsuario.nickname = request.form['nicknameUsuario']
-        nuevoUsuario.contrasena = request.form['password']
-        nuevoUsuario.empresaAsociada = request.form['abreviatura']
-        cliente.append(nuevoUsuario)
+        registrarse2(request.form['nicknameUsuario'],request.form['password'],request.form['abreviatura'])
     return render_template('registrarse.html')
 @app.route('/')
 @app.route('/finanzasMenu', methods=['GET', 'POST'])
@@ -94,21 +112,7 @@ def listarEmpresas():
 @app.route('/ingresarEmpleado')
 def agregarEmpleado():
     if request.method == 'POST':
-        i = 0
-        a = False
-        for o in empresa:
-            if o.Abreviatura == abrUniversal:
-                a = True
-                break
-            i = i + 1
-        if a == True:
-            nuevoEmpleado = empleados()
-            nuevoEmpleado.nombre = request.form['nombre']
-            nuevoEmpleado.fechaIngreso = datetime.now()
-            nuevoEmpleado.Profesion = request.form['profesion']
-            nuevoEmpleado.superior = request.form['superior']
-            nuevoEmpleado.sueldo = request.form['sueldo']
-            empresa[i].agregarEmpleado(nuevoEmpleado)
+        ingresarEmpleado2(request.form['nombre'],request.form['profesion'], request.form['superior'],request.form['sueldo'])
     return render_template("ingresarEmpleado.html")
 app.run(debug=True)
 
