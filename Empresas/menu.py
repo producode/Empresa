@@ -18,6 +18,10 @@ cliente = []
 abrUniversal = ""
 app = Flask(__name__)
 @app.route('/')
+@app.route('/inicio', methods=['GET', 'POST'])
+def inicio():
+    return render_template('inicio.html')
+@app.route('/')
 @app.route('/principal', methods=['GET', 'POST'])
 def principal():
     return render_template('principal.html')
@@ -80,6 +84,26 @@ def listarEmpresas():
     return render_template("listarEmpresas.html",
                            title='Home',
                            posts=empresa)
+@app.route('/')
+@app.route('/ingresarEmpleado')
+def agregarEmpleado():
+    if request.method == 'POST':
+        i = 0
+        a = False
+        for o in empresa:
+            if o.Abreviatura == abrUniversal:
+                a = True
+                break
+            i = i + 1
+        if a == True:
+            nuevoEmpleado = empleados()
+            nuevoEmpleado.nombre = request.form['nombre']
+            nuevoEmpleado.fechaIngreso = datetime.now()
+            nuevoEmpleado.Profesion = request.form['profesion']
+            nuevoEmpleado.superior = request.form['superior']
+            nuevoEmpleado.sueldo = request.form['sueldo']
+            empresa[i].agregarEmpleado(nuevoEmpleado)
+    return render_template("ingresarEmpleado.html")
 app.run(debug=True)
 
 print("--Bienvenido--")
