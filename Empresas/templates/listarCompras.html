@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <style>
+p {
+	color: black;
+    font-family: calibri;
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+}
+body {
+  margin: 0 auto;
+  background-color: powderblue;
+  padding: 0 20px 20px 20px;
+}h1 {
+    color: blue;
+    font-family: verdana;
+    font-size: 300%;
+    text-align: center;
+}
+input {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+th {
+	color: green;
+	text-align: center;
+}
+table {
+	text-align: center;
+	}
+        </style>
+    </head>
+    <body>
+    <h1>Compras</h1>
+        {% for post in posts %}
+        <div><p>id: <b>{{ post.idCompra }}</b> precio: <b>{{ post.Precio }}</b> fecha: <b>{{ post.Fecha }}</b> material: <b>{{ post.material }}</b> cantidad: <b>{{ post.cantidad }}</b></p></div>
+        {% endfor %}
+    </body>
+</html>

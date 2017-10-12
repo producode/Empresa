@@ -15,7 +15,8 @@ empresa = []
 fabbricantes = []
 categoriaLista = []
 cliente = []
-abrUniversal = ""
+abrUniversal = "eds"
+fabUniversal = "aaa"
 
 def ingresarEmpresa2(nombre,rublo,abreviatura):
     nuevaEmpresa = empresas()
@@ -49,6 +50,62 @@ def ingresarEmpleado2(nombre,profesion,superior,sueldo):
         nuevoEmpleado.superior = superior
         nuevoEmpleado.sueldo = sueldo
         empresa[i].agregarEmpleado(nuevoEmpleado)
+def ingresarAccionista2(nombre,cantidad):
+    i = 0
+    a = False
+    for o in empresa:
+        if o.Abreviatura == abrUniversal:
+            a = True
+            break
+        i = i + 1
+    if a == True:
+        nuevoAccionista = accionistas()
+        nuevoAccionista.nombre = nombre
+        nuevoAccionista.fechaIngreso = datetime.now()
+        nuevoAccionista.cantidadAcciones = cantidad
+        empresa[i].agregarAccionista(nuevoAccionista)
+def listarEmpleados2(): #busca el numero de la empresa segun el abrUniversal, por lo que se puede usar para cualquier cosa que lo requiera.
+    a = False
+    i = 0
+    for o in empresa:
+        if o.Abreviatura == abrUniversal:
+            a = True
+            break
+        i = i + 1
+    if a:
+        return i
+    else:
+        return 0
+def modifcarEmpleado2(nombre,superior,sueldo):
+    for o in empresa[listarEmpleados2()].Empleados:
+        if o.nombre == nombre:
+            o.superior = superior
+            o.sueldo = sueldo
+            break
+def eliminarEmpleado2(nombre):
+    empresa[listarEmpleados2()].eliminarEmpleado(nombre)
+def modificarAccionista2(nombre,cantidad):
+    empresa[listarEmpleados2()].modificarAcciones(nombre, cantidad)
+def eliminarAccionista2(nombre):
+    empresa[listarEmpleados2()].eliminarAccionista(nombre)
+def elegirFabricane(fabricante):
+    i = 0
+    for o in fabbricantes:
+        if o.Abreviatura == fabricante:
+            break
+        i = i + 1
+    return i
+def insertarCompra2(fabricante,material,cantidad):
+    nuevaCompra = compras()
+    nuevaCompra.idCompra = empresa[listarEmpleados2()].obtenerIdCompra()
+    nuevaCompra.Fecha = datetime.now()
+    for item2 in fabbricantes[elegirFabricane(fabricante)].materiale:
+        if item2.Nombre == material:
+            nuevaCompra.material = item2
+            nuevaCompra.cantidad = int(cantidad)
+            nuevaCompra.Precio = (nuevaCompra.cantidad * nuevaCompra.material.Precio)
+            empresa[listarEmpleados2()].agregarCompra(nuevaCompra)
+def listarMateriales2(fabricante):
 
 app = Flask(__name__)
 @app.route('/')
@@ -109,11 +166,45 @@ def listarEmpresas():
                            title='Home',
                            posts=empresa)
 @app.route('/')
+@app.route('/listarFabricantes', methods=['GET','POST'])
+def listarFabricantes():
+    return render_template("listarFabricantes.html",
+                           title='Home',
+                           posts=fabbricantes)
+@app.route('/')
+@app.route('/listarEmpleados', methods=['GET','POST'])
+def listarEmpleados():
+    return render_template("listarEmpleados.html",
+                           title='Home',
+                           posts=empresa[listarEmpleados2()].Empleados)
+@app.route('/')
+@app.route('/listarAccionistas', methods=['GET','POST'])
+def listarAccionistas():
+    return render_template("listarAccionistas.html",
+                           title='Home',
+                           posts=empresa[listarEmpleados2()].accionistas)
+@app.route('/')
+@app.route('/listarCompras', methods=['GET','POST'])
+def listarComprass():
+    return render_template("listarCompras.html",
+                           title='Home',
+                           posts=empresa[listarEmpleados2()].Compras)
+@app.route('/')
 @app.route('/ingresarEmpleado')
 def agregarEmpleado():
     if request.method == 'POST':
-        ingresarEmpleado2(request.form['nombre'],request.form['profesion'], request.form['superior'],request.form['sueldo'])
+        nombre = request.form['nombre']
+        profesion = request.form['profesion']
+        superior = request.form['superior']
+        sueldo = request.form['sueldo']
+        ingresarEmpleado2(nombre,profesion, superior,sueldo)
     return render_template("ingresarEmpleado.html")
+@app.route('/')
+@app.route('/verFabricante')
+def verFabricante():
+    if request.method == 'POST':
+        fabUniversal = request.form['abreviatura']
+    return render_template("verFabricante.html")
 app.run(debug=True)
 
 print("--Bienvenido--")
@@ -148,186 +239,27 @@ while seguir:
             a = input()
     elif opcion == "2":
         print("elija una opcion")
-        print("0: ver lista de empresas")
-        print("1: agregar una empresa")
-        print("2: agregar empleados")
-        print("3: agregar accionista")
-        print("4: ver lista de empleados")
-        print("5: ver lista de accionistas")
-        print("6: modificar sueldo empleado")
-        print("7: modificar superior empleado")
-        print("8: eliminar empleado")
-        print("9: modificar cantidad de acciones de accionista")
-        print("10: eliminar accionista")
-        opcion2 = input()
-        if opcion2 == "0":
-            for item in empresa:
-                print("Nombre: ",item.Nombre," Rublo: ", item.Rublo," Abreviatura: ", item.Abreviatura)
-            print("presione enter para continuar")
-            a = input()
-        elif opcion2 == "1":
-            a = a +1
-        elif opcion2 == "2":
-            empresaAbreviatura = input("ingrese la abreviatura de la empresa: ")
-            i = 0
-            a = False
-            for o in empresa:
-                if o.Abreviatura == empresaAbreviatura:
-                    a = True
-                    break
-                i = i + 1
-            if a == True:
-                nuevoEmpleado = empleados()
-                nuevoEmpleado.nombre = input("ingrese el nombre del empleado: ")
-                nuevoEmpleado.fechaIngreso = datetime.now()
-                nuevoEmpleado.Profesion = input("ingrese la profesion del empleado: ")
-                nuevoEmpleado.superior = input("ingrese el nombre de su superior, de lo contrario dejar vacio: ")
-                nuevoEmpleado.sueldo = input("ingrese el sueldo del empleado: ")
-                empresa[i].agregarEmpleado(nuevoEmpleado)
-            else:
-                print("no se encontro ninguna empresa")
-            a = input("presione enter para continuar")
-        elif opcion2 == "3":
-            empresaAbreviatura = input("ingrese la abreviatura de la empresa: ")
-            i = 0
-            a = False
-            for o in empresa:
-                if o.Abreviatura == empresaAbreviatura:
-                    a = True
-                    break
-                i = i + 1
-            if a == True:
-                nuevoAccionista = accionistas()
-                nuevoAccionista.nombre = input("ingrese el nombre del accionista: ")
-                nuevoAccionista.fechaIngreso = datetime.now()
-                nuevoAccionista.cantidadAcciones = input("ingrese la cantidad de acciones: ")
-                empresa[i].agregarAccionista(nuevoAccionista)
-            else:
-                print("no se encontro ninguna empresa")
-            a = input("presione enter para continuar")
-        elif opcion2 == "4":
-            empresaAbreviatura = input("ingrese la abreviatura de la empresa: ")
-            i = 0
-            for o in empresa:
-                if o.Abreviatura == empresaAbreviatura:
-                    break
-                i = i + 1
-            for item in empresa[i].Empleados:
-                print("Nombre: ", item.nombre," profesion: ", item.Profesion," sueldo: ", item.sueldo," fecha de ingreso: ", item.fechaIngreso," superior: ", item.superior)
-            a = input("presione enter para continuar")
-        elif opcion2 == "5":
-            empresaAbreviatura = input("ingrese la abreviatura de la empresa: ")
-            i = 0
-            for o in empresa:
-                if o.Abreviatura == empresaAbreviatura:
-                    break
-                i = i + 1
-            for item in empresa[i].accionistas:
-                print("Nombre: ", item.nombre, " fecha de ingreso: ", item.fechaIngreso, " cantidad de acciones: ", item.cantidadAcciones)
-            a = input("presione enter para continuar")
-        elif opcion2 == "6":
-            empresaAbreviatura = input("ingrese la abreviatura de la empresa: ")
-            i = 0
-            for o in empresa:
-                if o.Abreviatura == empresaAbreviatura:
-                    break
-                i = i + 1
-            empleadoNombre = input("ingrese el nombre del empleado: ")
-            for o in empresa[i].Empleados:
-                if o.nombre == empleadoNombre:
-                    o.sueldo = input("ingrese el nuevo sueldo del empleado: ")
-                    break
-        elif opcion2 == "7":
-            empresaAbreviatura = input("ingrese la abreviatura de la empresa: ")
-            i = 0
-            for o in empresa:
-                if o.Abreviatura == empresaAbreviatura:
-                    break
-                i = i + 1
-            empleadoNombre = input("ingrese el nombre del empleado: ")
-            for o in empresa[i].Empleados:
-                if o.nombre == empleadoNombre:
-                    o.superior = input("ingrese el nuevo superior del empleado: ")
-                    break
-        elif opcion2 == "8":
-            empresaAbreviatura = input("ingrese la abreviatura de la empresa: ")
-            i = 0
-            for o in empresa:
-                if o.Abreviatura == empresaAbreviatura:
-                    break
-                i = i + 1
-            empleadoNombre = input("ingrese el nombre del empleado: ")
-            empresa[i].eliminarEmpleado(empleadoNombre)
-        elif opcion2 == "9":
-            empresaAbreviatura = input("ingrese la abreviatura de la empresa: ")
-            i = 0
-            for o in empresa:
-                if o.Abreviatura == empresaAbreviatura:
-                    break
-                i = i + 1
-            accionistaNombre = input("ingrese el nombre del accionista: ")
-            nuevaCantidad = input("ingrese la nueva cantidad de acciones: ")
-            empresa[i].modificarAcciones(accionistaNombre,nuevaCantidad)
-        elif opcion2 == "10":
-            empresaAbreviatura = input("ingrese la abreviatura de la empresa: ")
-            i = 0
-            for o in empresa:
-                if o.Abreviatura == empresaAbreviatura:
-                    break
-                i = i + 1
-            accionistaNombre = input("ingrese el nombre del accionista: ")
-            empresa[i].eliminarAccionista(accionistaNombre)
+        print("0: ver lista de empresas -+-")
+        print("1: agregar una empresa -+-")
+        print("2: agregar empleados -+-")
+        print("3: agregar accionista -")
+        print("4: ver lista de empleados -+")
+        print("5: ver lista de accionistas -+")
+        print("6: modificar sueldo empleado -")
+        print("7: modificar superior empleado -")
+        print("8: eliminar empleado -")
+        print("9: modificar cantidad de acciones de accionista -")
+        print("10: eliminar accionista -")
     elif opcion == "3":
         print("elija una opcion")
-        print("0: ver lista de empresas")
-        print("1: agregar una compra")
-        print("2: historial de compras")
-        opcion3 = input()
-        if opcion3 == "0":
-            for item in empresa:
-                print("Nombre: ",item.Nombre," Rublo: ", item.Rublo," Abreviatura: ", item.Abreviatura)
-            print("presione enter para continuar")
-            a = input()
-        elif opcion3 == "1":
-            empresaAbreviatura = input("ingrese la abreviatura de la empresa: ")
-            i = 0
-            for o in empresa:
-                if o.Abreviatura == empresaAbreviatura:
-                    break
-                i = i + 1
-            nuevaCompra = compras()
-            nuevaCompra.idCompra = empresa[i].obtenerIdCompra()
-            nuevaCompra.Fecha = datetime.now()
-            elegirFabricante = input("ingrese la abreviatura del fabricante del material a comprar: ")
-            i = 0
-            for o in fabbricantes:
-                if o.Abreviatura == elegirFabricante:
-                    break
-                i = i + 1
-            print("lista de materiales del fabricante")
-            for item2 in fabbricantes[i].materiale:
-                print("nombre: ",item2.Nombre, " precio: ", item2.Precio, " unidad de medicion: ", item2.UnidadMedicion)
-            elegirMaterial = input("ingrese el nombre del material: ")
-            for item2 in fabbricantes[i].materiale:
-                if item2.Nombre == elegirMaterial:
-                    nuevaCompra.material = item2
-                    nuevaCompra.cantidad = int(input("ingrese la cantidad de la compra: "))
-                    nuevaCompra.Precio = (nuevaCompra.cantidad * nuevaCompra.material.Precio)
-                    empresa[i].agregarCompra(nuevaCompra)
-        elif opcion3 == "2":
-            empresaAbreviatura = input("ingrese la abreviatura de la empresa: ")
-            i = 0
-            for o in empresa:
-                if o.Abreviatura == empresaAbreviatura:
-                    break
-                i = i + 1
-            for item in empresa[i].Compras:
-                print("ID: ", item.idCompra, " Fecha: ", item.Fecha," Precio: ",item.Precio, " Material: ", item.material.Nombre, " Cantidad: ", item.cantidad)
+        print("0: ver lista de empresas -+-")
+        print("1: agregar una compra -")
+        print("2: historial de compras -+")
     elif opcion == "4":
         print("elija una opcion")
-        print("0: ver lista de empresas")
-        print("1: ver lista de fabricantes")
-        print("2: ver lista de materiales")
+        print("0: ver lista de empresas -+-")
+        print("1: ver lista de fabricantes -+")
+        print("2: ver lista de materiales ")
         print("3: ingresar un fabricante")
         print("4: borrar un fabricante")
         print("5: agregar un materia")
@@ -335,15 +267,9 @@ while seguir:
         print("7: eliminar un material")
         opcion4 = input()
         if opcion4 == "0":
-            for item in empresa:
-                print("Nombre: ", item.Nombre, " Rublo: ", item.Rublo, " Abreviatura: ", item.Abreviatura)
-            print("presione enter para continuar")
-            a = input()
+            a = 1
         elif opcion4 == "1":
-            for item in fabbricantes:
-                print("Nombre: ",item.Nombre," Rublo: ", item.Rublo," Abreviatura: ", item.Abreviatura)
-            print("presione enter para continuar")
-            a = input()
+            a = 1
         elif opcion4 == "2":
             i = 0
             elegirFabricante = input("ingrese abreviatura del fabricante: ")
@@ -353,7 +279,8 @@ while seguir:
                 i = i + 1
             print("lista de materiales del fabricante")
             for item2 in fabbricantes[i].materiale:
-                print("nombre: ", item2.Nombre, " precio: ", item2.Precio, " unidad de medicion: ",item2.UnidadMedicion)
+                print("nombre: ", item2.Nombre, " precio: ", item2.Precio, " unidad de medicion: ",
+                      item2.UnidadMedicion)
             i = input("presione enter para continuar")
         elif opcion4 == "3":
             nuevoFabricante = fabricantes()
