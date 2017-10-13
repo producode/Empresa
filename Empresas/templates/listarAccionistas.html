@@ -42,7 +42,7 @@ table {
     <body>
     <h1>Accionistas</h1>
         {% for post in posts %}
-        <div><p>Nombre: <b>{{ post.Nombre }}</b> Ingreso: <b>{{ post.fechaIngreso }}</b> cantidad de acciones: <b>{{ post.cantidadAcciones }}</b></p></div>
+        <div><p>Nombre: <b>{{ post.nombre }}</b> Ingreso: <b>{{ post.fechaIngreso }}</b> cantidad de acciones: <b>{{ post.cantidadAcciones }}</b></p></div>
         {% endfor %}
     <form action="/principal">
         <input type="submit" value="volver" />

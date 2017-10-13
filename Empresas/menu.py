@@ -35,21 +35,13 @@ def registrarse2(nickname,password,empresasociada):
     nuevoUsuario.empresaAsociada = empresasociada
     cliente.append(nuevoUsuario)
 def ingresarEmpleado2(nombre,profesion,superior,sueldo):
-    i = 0
-    a = False
-    for o in empresa:
-        if o.Abreviatura == abrUniversal:
-            a = True
-            break
-        i = i + 1
-    if a == True:
-        nuevoEmpleado = empleados()
-        nuevoEmpleado.nombre = nombre
-        nuevoEmpleado.fechaIngreso = datetime.now()
-        nuevoEmpleado.Profesion = profesion
-        nuevoEmpleado.superior = superior
-        nuevoEmpleado.sueldo = sueldo
-        empresa[i].agregarEmpleado(nuevoEmpleado)
+    nuevoEmpleado = empleados()
+    nuevoEmpleado.nombre = nombre
+    nuevoEmpleado.fechaIngreso = datetime.now()
+    nuevoEmpleado.Profesion = profesion
+    nuevoEmpleado.superior = superior
+    nuevoEmpleado.sueldo = sueldo
+    empresa[listarEmpleados2()].agregarEmpleado(nuevoEmpleado)
 def ingresarAccionista2(nombre,cantidad):
     i = 0
     a = False
@@ -144,6 +136,7 @@ def principal():
 def ingresar():
     if request.method == 'POST':
         ingresar2(request.form['nicknameUsuario'],request.form['password'])
+    print("ahora")
     return render_template('ingreso.html')
 @app.route('/')
 @app.route('/registrarse', methods=['GET', 'POST'])
@@ -204,17 +197,19 @@ def listarFabricantes():
 @app.route('/')
 @app.route('/listarEmpleados', methods=['GET','POST'])
 def listarEmpleados():
+    print(listarEmpleados2())
+    uno = empresa[listarEmpleados2()].Empleados
     return render_template("listarEmpleados.html",
                            title='Home',
-                           posts=empresa[listarEmpleados2()].Empleados)
+                           posts=uno)
 @app.route('/')
-@app.route('/ingresarAccionista')
+@app.route('/ingresarAccionista', methods=['GET','POST'])
 def ingresarAccionistas():
     if request.method == 'POST':
         ingresarAccionista2(request.form['nombre'],request.form['cantidadAcciones'])
     return render_template("ingresarAccionista.html")
 @app.route('/')
-@app.route('/modificarEmpleado')
+@app.route('/modificarEmpleado', methods=['GET','POST'])
 def modificarEmpleado():
     if request.method == 'POST':
         modificarEmpleado2(request.form['nombre'],request.form['superior'],request.form['sueldo'])
@@ -232,73 +227,73 @@ def listarComprass():
                            title='Home',
                            posts=empresa[listarEmpleados2()].Compras)
 @app.route('/')
-@app.route('/ingresarEmpleado')
+@app.route('/ingresarEmpleado', methods=['GET','POST'])
 def ingresarEmpleado():
     if request.method == 'POST':
         ingresarEmpleado2(request.form['nombre'],request.form['profesion'], request.form['superior'],request.form['sueldo'])
     return render_template("ingresarEmpleado.html")
 @app.route('/')
-@app.route('/verFabricante')
+@app.route('/verFabricante', methods=['GET','POST'])
 def verFabricante():
     if request.method == 'POST':
         fabUniversal = request.form['abreviatura']
     return render_template("verFabricante.html")
 @app.route('/')
-@app.route('/eliminarFabricante')
+@app.route('/eliminarFabricante', methods=['GET','POST'])
 def eliminarFabricante():
     if request.method == 'POST':
         eliminarFabricante2(request.form['abreviatura'])
     return render_template("eliminarFabricante.html")
 @app.route('/')
-@app.route('/ingresarMaterial')
+@app.route('/ingresarMaterial', methods=['GET','POST'])
 def ingresarMaterial():
     if request.method == 'POST':
         ingresarMaterial2(request.form['abreviatura'],request.form['nombre'],request.form['precio'],request.form['um'])
     return render_template("ingresarMaterial.html")
 @app.route('/')
-@app.route('/modificarMaterial')
+@app.route('/modificarMaterial', methods=['GET','POST'])
 def modificarMaterial():
     if request.method == 'POST':
         modificarMaterial2(request.form['abreviatura'],request.form['nombre'],request.form['precio'])
     return render_template("modificarMaterial.html")
 @app.route('/')
-@app.route('/eliminarMaterial')
+@app.route('/eliminarMaterial', methods=['GET','POST'])
 def eliminarMaterial():
     if request.method == 'POST':
         eliminarMaterial2(request.form['abreviatura'],request.form['nombre'])
     return render_template("eliminarMaterial.html")
 @app.route('/')
-@app.route('/listarMaterialesp')
+@app.route('/listarMaterialesp', methods=['GET','POST'])
 def listarMaterialesp():
     if request.method():
         listarMateriales2(request.form['abreviatura'])
     return render_template("listarMaterialesp.html")
 @app.route('/')
-@app.route('/listarMaterialess')
+@app.route('/listarMaterialess', methods=['GET','POST'])
 def listarMaterialess():
     return render_template("listarMaterialess",
                            title='Home',
                            posts=fabbricantes[elegirFabricane(fabUniversal)].materiale)
 @app.route('/')
-@app.route('/eliminarEmpleado')
+@app.route('/eliminarEmpleado', methods=['GET','POST'])
 def eliminarEmpleado():
     if request.method == 'POST':
         eliminarEmpleado2(request.form['nombre'])
     return render_template("eliminarEmpleado.html")
 @app.route('/')
-@app.route('/modificarAccionista')
+@app.route('/modificarAccionista', methods=['GET','POST'])
 def modificarAccionista():
     if request.method == 'POST':
         modificarAccionista2(request.form['nombre'],request.form['cantidad'])
     return render_template("modificarAccionista.html")
 @app.route('/')
-@app.route('/eliminarAccionista')
+@app.route('/eliminarAccionista', methods=['GET','POST'])
 def eliminarAccionista():
     if request.method == 'POST':
         eliminarAccionista2(request.form['nombre'])
     return render_template("eliminarAccionista.html")
 @app.route('/')
-@app.route('/ingresarCompra')
+@app.route('/ingresarCompra', methods=['GET','POST'])
 def ingresarCompra():
     if request.method == 'POST':
         insertarCompra2(request.form['abreviatura'],request.form['nombre'],request.form['cantidad'])
