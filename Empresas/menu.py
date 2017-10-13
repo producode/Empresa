@@ -106,7 +106,30 @@ def insertarCompra2(fabricante,material,cantidad):
             nuevaCompra.Precio = (nuevaCompra.cantidad * nuevaCompra.material.Precio)
             empresa[listarEmpleados2()].agregarCompra(nuevaCompra)
 def listarMateriales2(fabricante):
-
+    a = 1
+def insertarFabricante2(nombre,rublo,abreviatura):
+    nuevoFabricante = fabricantes()
+    nuevoFabricante.Nombre = nombre
+    nuevoFabricante.Rublo = rublo
+    nuevoFabricante.Abreviatura = abreviatura
+    fabbricantes.append(nuevoFabricante)
+def eliminarFabricante2(nombre):
+    del fabbricantes[elegirFabricane(nombre)]
+def ingresarMaterial2(abreviatura,nombre,precio,um):
+    fabbricantes[elegirFabricane(abreviatura)].crearMaterial(nombre, precio, um)
+def modificarMaterial2(abreviatura,nombre,precio):
+    for item in fabbricantes[elegirFabricane(abreviatura)].materiale:
+        if item.Nombre == nombre:
+            item.Precio = precio
+def eliminarMaterial2(abreviatura,nombre):
+    o = 0
+    for item2 in fabbricantes[elegirFabricane(abreviatura)].materiale:
+        if item2.Nombre == nombre:
+            break
+        o = o + 1
+    del fabbricantes[elegirFabricane(abreviatura)].materiale[o]
+def listarMateriales2(abreviatura):
+    fabUniversal = abreviatura
 app = Flask(__name__)
 @app.route('/')
 @app.route('/inicio', methods=['GET', 'POST'])
@@ -160,6 +183,13 @@ def ingresarEmpresa():
     return render_template('AgregarEmpresa.html',
                            title='Sign In')
 @app.route('/')
+@app.route('/ingresarFabricante', methods=['GET', 'POST'])
+def ingresarFabricante():
+    if request.method == 'POST':
+        insertarFabricante2(request.form['Nombre'],request.form['Rublo'],request.form['Abreviatura'])
+    return render_template('ingresarFabricante.html',
+                           title='Sign In')
+@app.route('/')
 @app.route('/listarEmpresas', methods=['GET','POST'])
 def listarEmpresas():
     return render_template("listarEmpresas.html",
@@ -191,13 +221,9 @@ def listarComprass():
                            posts=empresa[listarEmpleados2()].Compras)
 @app.route('/')
 @app.route('/ingresarEmpleado')
-def agregarEmpleado():
+def ingresarEmpleado():
     if request.method == 'POST':
-        nombre = request.form['nombre']
-        profesion = request.form['profesion']
-        superior = request.form['superior']
-        sueldo = request.form['sueldo']
-        ingresarEmpleado2(nombre,profesion, superior,sueldo)
+        ingresarEmpleado2(request.form['nombre'],request.form['profesion'], request.form['superior'],request.form['sueldo'])
     return render_template("ingresarEmpleado.html")
 @app.route('/')
 @app.route('/verFabricante')
@@ -205,6 +231,43 @@ def verFabricante():
     if request.method == 'POST':
         fabUniversal = request.form['abreviatura']
     return render_template("verFabricante.html")
+@app.route('/')
+@app.route('/eliminarFabricante')
+def eliminarFabricante():
+    if request.method == 'POST':
+        eliminarFabricante2(request.form['abreviatura'])
+    return render_template("eliminarFabricante.html")
+@app.route('/')
+@app.route('/ingresarMaterial')
+def ingresarMaterial():
+    if request.method == 'POST':
+        ingresarMaterial2(request.form['abreviatura'],request.form['nombre'],request.form['precio'],request.form['um'])
+    return render_template("ingresarMaterial.html")
+@app.route('/')
+@app.route('/modificarMaterial')
+def modificarMaterial():
+    if request.method == 'POST':
+        modificarMaterial2(request.form['abreviatura'],request.form['nombre'],request.form['precio'])
+    return render_template("modificarMaterial.html")
+@app.route('/')
+@app.route('/eliminarMaterial')
+def eliminarMaterial():
+    if request.method == 'POST':
+        eliminarMaterial2(request.form['abreviatura'],request.form['nombre'])
+    return render_template("eliminarMaterial.html")
+@app.route('/')
+@app.route('/listarMaterialesp')
+def listarMaterialesp():
+    if request.method():
+        listarMateriales2(request.form['abreviatura'])
+    return render_template("listarMaterialesp.html")
+@app.route('/')
+@app.route('/listarMaterialess')
+def listarMaterialess():
+    return render_template("listarMaterialess",
+                           title='Home',
+                           posts=fabbricantes[elegirFabricane(fabUniversal)].materiale)
+
 app.run(debug=True)
 
 print("--Bienvenido--")
@@ -241,7 +304,7 @@ while seguir:
         print("elija una opcion")
         print("0: ver lista de empresas -+-")
         print("1: agregar una empresa -+-")
-        print("2: agregar empleados -+-")
+        print("2: agregar empleados -+")
         print("3: agregar accionista -")
         print("4: ver lista de empleados -+")
         print("5: ver lista de accionistas -+")
@@ -259,96 +322,12 @@ while seguir:
         print("elija una opcion")
         print("0: ver lista de empresas -+-")
         print("1: ver lista de fabricantes -+")
-        print("2: ver lista de materiales ")
-        print("3: ingresar un fabricante")
-        print("4: borrar un fabricante")
-        print("5: agregar un materia")
-        print("6: cambiar precio de material")
-        print("7: eliminar un material")
-        opcion4 = input()
-        if opcion4 == "0":
-            a = 1
-        elif opcion4 == "1":
-            a = 1
-        elif opcion4 == "2":
-            i = 0
-            elegirFabricante = input("ingrese abreviatura del fabricante: ")
-            for item in fabbricantes:
-                if item.Abreviatura == elegirFabricante:
-                    break
-                i = i + 1
-            print("lista de materiales del fabricante")
-            for item2 in fabbricantes[i].materiale:
-                print("nombre: ", item2.Nombre, " precio: ", item2.Precio, " unidad de medicion: ",
-                      item2.UnidadMedicion)
-            i = input("presione enter para continuar")
-        elif opcion4 == "3":
-            nuevoFabricante = fabricantes()
-            nuevoFabricante.Nombre = input("ingrese el nombre: ")
-            nuevoFabricante.Rublo = input("ingrese el rublo: ")
-            nuevoFabricante.Abreviatura = input("ingrese la abreviatura: ")
-            fabbricantes.append(nuevoFabricante)
-        elif opcion4 == "4":
-            elegirFabricante = input("ingrese la abreviatura del fabricante: ")
-            i = 0
-            encuentro = True
-            for o in fabbricantes:
-                if o.Abreviatura == elegirFabricante:
-                    del fabbricantes[i]
-                    encuentro = False
-                    break
-                i = i + 1
-            if encuentro:
-                i = input("no se encontro al fabricante. Presione enter para seguir")
-        elif opcion4 == "5":
-            elegirFabricante = input("ingrese la abreviatura del fabricante: ")
-            i = 0
-            encuentro = True
-            for o in fabbricantes:
-                if o.Abreviatura == elegirFabricante:
-                    encuentro = False
-                    break
-                i = i + 1
-            if encuentro:
-                i = input("no se encontro al fabricante. Presione enter para seguir")
-            else:
-                nombre = input("ingrese el nombre del nuevo material: ")
-                precio = int(input("ingrese el precio del nuevo material: "))
-                um = input("ingrese la unidad de medicion del nuevo material: ")
-                fabbricantes[i].crearMaterial(nombre,precio,um)
-        elif opcion4 == "6":
-            elegirFabricante = input("ingrese la abreviatura del fabricante del material: ")
-            i = 0
-            for o in fabbricantes:
-                if o.Abreviatura == elegirFabricante:
-                    break
-                i = i + 1
-            print("lista de materiales del fabricante")
-            for item2 in fabbricantes[i].materiale:
-                print("nombre: ", item2.Nombre, " precio: ", item2.Precio, " unidad de medicion: ",item2.UnidadMedicion)
-            elegirMaterial = input("ingrese el nombre del material: ")
-            for item2 in fabbricantes[i].materiale:
-                if item2.Nombre == elegirMaterial:
-                    item2.Precio = int(input("ingrese el nuevo precio: "))
-        elif opcion4 == "7":
-            elegirFabricante = input("ingrese la abreviatura del fabricante del material: ")
-            i = 0
-            for o in fabbricantes:
-                if o.Abreviatura == elegirFabricante:
-                    break
-                i = i + 1
-            print("lista de materiales del fabricante")
-            for item2 in fabbricantes[i].materiale:
-                print("nombre: ", item2.Nombre, " precio: ", item2.Precio, " unidad de medicion: ",
-                      item2.UnidadMedicion)
-            elegirMaterial = input("ingrese el nombre del material: ")
-            o = 0
-            for item2 in fabbricantes[i].materiale:
-                if item2.Nombre == elegirMaterial:
-                    break
-                o = o + 1
-            del fabbricantes[i].materiale[o]
-
+        print("2: ver lista de materiales -+")
+        print("3: ingresar un fabricante -+")
+        print("4: borrar un fabricante -+")
+        print("5: agregar un materia -+")
+        print("6: cambiar precio de material -+")
+        print("7: eliminar un material -+")
     elif opcion == "5":
         print("elija una opcion")
         print("0: ver lista de empresas")

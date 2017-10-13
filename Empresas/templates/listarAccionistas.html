@@ -44,5 +44,8 @@ table {
         {% for post in posts %}
         <div><p>Nombre: <b>{{ post.Nombre }}</b> Ingreso: <b>{{ post.fechaIngreso }}</b> cantidad de acciones: <b>{{ post.cantidadAcciones }}</b></p></div>
         {% endfor %}
+    <form action="/principal">
+        <input type="submit" value="volver" />
+    </form>
     </body>
 </html>

@@ -44,5 +44,8 @@ table {
         {% for post in posts %}
         <div><p>id: <b>{{ post.idCompra }}</b> precio: <b>{{ post.Precio }}</b> fecha: <b>{{ post.Fecha }}</b> material: <b>{{ post.material }}</b> cantidad: <b>{{ post.cantidad }}</b></p></div>
         {% endfor %}
+    <form action="/principal">
+        <input type="submit" value="volver" />
+    </form>
     </body>
 </html>

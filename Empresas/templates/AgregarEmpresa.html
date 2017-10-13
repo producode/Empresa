@@ -38,7 +38,8 @@ table {
 	}
 </style>
 </head>
-<h1>agregar empresa</h1>
+<body>
+	<h1>agregar empresa</h1>
     <form action="/ingresarEmpresa" method="post" name="login">
     	<table>
     		<tr>
@@ -57,15 +58,15 @@ table {
     			</th>
     		</tr>
     	</table>
-        <input type="submit" value="subir">
 		<table>
 			<tr>
 				<th>
-					<form action="/principal">
-						<input type="submit" value="volver" />
-					</form>
+					<input type="submit" value="subir">
 				</th>
 			</tr>
 		</table>
-
     </form>
+	<form action="/principal">
+		<input type="submit" value="volver" />
+	</form>
+</body>

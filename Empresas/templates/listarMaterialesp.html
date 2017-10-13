@@ -39,25 +39,18 @@ table {
 </style>
 </head>
 <body>
-	<h1>elegir fabricante</h1>
-    <form action="/verFabricante" method="post" name="login">
+	<h1>modificar precio</h1>
+    <form action="/listarMaterialesp" method="post" name="login">
     	<table>
 			<tr>
-    			<th><center><p aling = "center">abreviatura</p></center></th>
+    			<th><center><p aling = "center">abreviatura de la empresa</p></center></th>
     			<th><input type="text" value="" id="abreviatura" name="abreviatura"></p>
     			</th>
     		</tr>
     	</table>
-
-		<table>
-			<tr>
-				<th>
-					<form action="/listarFabricantes">
-						<input type="submit" value="subir">
-					</form>
-				</th>
-			</tr>
-		</table>
+        <form action="/listarMaterialess">
+            <input type="submit" value="subir">
+        </form>
     </form>
 	<form action="/principal">
 		<input type="submit" value="volver" />

@@ -38,8 +38,9 @@ table {
 	}
 </style>
 </head>
-<h1>Agregar accionista</h1>
-    <form action="/ingresarEmpresa" method="post" name="login">
+<body>
+	<h1>Agregar accionista</h1>
+    <form action="/ingresarAccionista" method="post" name="login">
     	<table>
     		<tr>
     			<th><center><p aling = "center">nombre</p></center></th>
@@ -55,12 +56,10 @@ table {
         <table>
 			<tr>
 				<th><input type="submit" value="subir"></th>
-				<th>
-					<form action="/principal">
-						<input type="submit" value="volver" />
-					</form>
-				</th>
 			</tr>
 		</table>
-
     </form>
+	<form action="/principal">
+		<input type="submit" value="volver" />
+	</form>
+</body>

@@ -3,7 +3,7 @@
     </head>
     <body>
         {% for post in posts %}
-        <div><p>Nombre: <b>{{ post.Nombre }}</b> Rublo: <b>{{ post.Rublo }}</b> Abreviatura: <b>{{ post.Abreviatura }}</b></p></div>
+        <div><p>Nombre: <b>{{ post.Nombre }}</b> Precio: <b>{{ post.Precio }}</b> Unidad de Medicion: <b>{{ post.UnidadMedicion }}</b></p></div>
         {% endfor %}
     <form action="/principal">
         <input type="submit" value="volver" />

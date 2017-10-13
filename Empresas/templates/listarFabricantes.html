@@ -5,5 +5,8 @@
         {% for post in posts %}
         <div><p>Nombre: <b>{{ post.Nombre }}</b> Rublo: <b>{{ post.Rublo }}</b> Abreviatura: <b>{{ post.Abreviatura }}</b></p></div>
         {% endfor %}
+    <form action="/principal">
+        <input type="submit" value="volver" />
+    </form>
     </body>
 </html>
