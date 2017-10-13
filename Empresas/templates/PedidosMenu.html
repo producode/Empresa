@@ -31,11 +31,47 @@ th {
 <body>
 <center>
 <table>
+
 	<tr>
-		<th><form action="/listarPedidos">
-			    <input type="submit" value="Ver pedidos" />
+		<th><form action="/ingresarProducto">
+			    <input type="submit" value="Agregar producto" />
 			</form>
 		</th>
+		<th><form action="/modificarProducto">
+			    <input type="submit" value="Modificar producto" />
+			</form>
+		</th>
+		<th><form action="/eliminarProducto">
+			    <input type="submit" value="Borrar producto" />
+			</form>
+		</th>
+		<th>
+			<form action="/ingresarMateriales">
+				<input type="submit" value="Ingresar un material">
+			</form>
+		</th>
+	</tr>
+	<tr>
+		<th><form action="/insertarCategoria">
+			    <input type="submit" value="Agregar categoria" />
+			</form>
+		</th>
+		<th><form action="/eliminarCategoria">
+			    <input type="submit" value="Borrar categoria" />
+			</form>
+		</th>
+		<th>
+			<form action="/listarCategoria">
+				<input type="submit" value="Ver categorias">
+			</form>
+		</th>
+		<th>
+			<form action="/listarProducto">
+				<input type="submit" value="Ver producto">
+			</form>
+		</th>
+	</tr>
+	<tr>
 		<th><form action="/insertarPedido">
 			    <input type="submit" value="Agregar pedido" />
 			</form>
@@ -44,10 +80,16 @@ th {
 			    <input type="submit" value="Borrar pedido" />
 			</form>
 		</th>
+		<th><form action="/listarPedidos">
+			    <input type="submit" value="Ver pedidos" />
+			</form>
+		</th>
 	</tr>
 </table>
 </center><table>
 </table>
-
+<form action="/principal">
+	<input type="submit" value="volver">
+</form>
 </body>
 </html>

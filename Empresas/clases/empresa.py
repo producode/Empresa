@@ -13,6 +13,7 @@ class empresas(companias):
     Pedidos = []
     gananciaMensual = []
     Compras = []
+    Productos = []
 
     def setEmpresa(self,nombre,rublo,abreviatura):
         self.Nombre = nombre
@@ -90,6 +91,9 @@ class empresas(companias):
 
     def obtenerIdCompra(self):
         return (len(self.Compras) + 1)
+
+    def obtenerIdPedido(self):
+        return (len(self.Productos) + 1)
 
     def getHistorialGanancia(self):
         return self.gananciaMensual

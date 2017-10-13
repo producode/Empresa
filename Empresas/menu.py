@@ -7,6 +7,7 @@ from Empresas.clases.empleado import empleados
 from Empresas.clases.accionista import accionistas
 from Empresas.clases.compra import compras
 from Empresas.clases.usuario import usuarios
+from Empresas.clases.producto import productos
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -122,6 +123,14 @@ def eliminarMaterial2(abreviatura,nombre):
     del fabbricantes[elegirFabricane(abreviatura)].materiale[o]
 def listarMateriales2(abreviatura):
     fabUniversal = abreviatura
+def ingresarProducto2(nombre,Coste,Descripcion,categoria,material):
+    nuevoproducto = productos()
+    nuevoproducto.Nombre = nombre
+    nuevoproducto.Coste = Coste
+    nuevoproducto.Descripcion = Descripcion
+    nuevoproducto.Categoria = categoria
+    nuevoproducto.material = material
+    nuevoproducto.idProducto = empresa[listarEmpleados2()].obtenerIdPedido()
 app = Flask(__name__)
 @app.route('/')
 @app.route('/inicio', methods=['GET', 'POST'])
@@ -298,6 +307,11 @@ def ingresarCompra():
     if request.method == 'POST':
         insertarCompra2(request.form['abreviatura'],request.form['nombre'],request.form['cantidad'])
     return render_template("ingresarCompra.html")
+@app.route('/')
+@app.route('/ingresarProducto', methods=['GET','POST'])
+def ingresarProducto():
+    if request.method == 'POST':
+        ingresarProducto(request.form['nombre'],request.form['coste'],request.form['descripcion'],request.form['categoria'])
 
 app.run(debug=True)
 
@@ -307,12 +321,12 @@ seguir = True
 while seguir:
     print("elija una opcion")
     print("1: FINANZAS")
-    print("2: EMPRESAS")
-    print("3: COMPRAS")
-    print("4: MATERIALES")
+    print("2: EMPRESAS -+-")
+    print("3: COMPRAS -+-")
+    print("4: MATERIALES-+-")
     print("5: PRODUCTOS")
     print("6: PEDIDOS")
-    print("7: SALIR")
+    print("7: SALIR-+-")
     opcion = input()
 
     if opcion == "1":
@@ -335,33 +349,36 @@ while seguir:
         print("elija una opcion")
         print("0: ver lista de empresas -+-")
         print("1: agregar una empresa -+-")
-        print("2: agregar empleados -+")
-        print("3: agregar accionista -+")
-        print("4: ver lista de empleados -+")
-        print("5: ver lista de accionistas -+")
-        print("6: modificar sueldo empleado -+")
-        print("7: modificar superior empleado -+")
-        print("8: eliminar empleado -+")
-        print("9: modificar cantidad de acciones de accionista -+")
-        print("10: eliminar accionista -+")
+        print("2: agregar empleados -+-")
+        print("3: agregar accionista -+-")
+        print("4: ver lista de empleados -+-")
+        print("5: ver lista de accionistas -+-")
+        print("6: modificar sueldo empleado -+-")
+        print("7: modificar superior empleado -+-")
+        print("8: eliminar empleado -+-")
+        print("9: modificar cantidad de acciones de accionista -+-")
+        print("10: eliminar accionista -+-")
     elif opcion == "3":
         print("elija una opcion")
         print("0: ver lista de empresas -+-")
-        print("1: agregar una compra -+")
-        print("2: historial de compras -+")
+        print("1: agregar una compra -+-")
+        print("2: historial de compras -+-")
     elif opcion == "4":
         print("elija una opcion")
         print("0: ver lista de empresas -+-")
-        print("1: ver lista de fabricantes -+")
-        print("2: ver lista de materiales -+")
-        print("3: ingresar un fabricante -+")
-        print("4: borrar un fabricante -+")
-        print("5: agregar un materia -+")
-        print("6: cambiar precio de material -+")
-        print("7: eliminar un material -+")
+        print("1: ver lista de fabricantes -+-")
+        print("2: ver lista de materiales -+-")
+        print("3: ingresar un fabricante -+-")
+        print("4: borrar un fabricante -+-")
+        print("5: agregar un materia -+-")
+        print("6: cambiar precio de material -+-")
+        print("7: eliminar un material -+-")
     elif opcion == "5":
         print("elija una opcion")
         print("0: ver lista de empresas")
+        print("1: agregar un pedido")
+        print("2: eliminar un pedido")
+        print("3: ver lista de pedidos")
         print("1: agregar un producto")
         print("2: modificar un producto")
         print("3: eliminar un producto")
@@ -371,9 +388,7 @@ while seguir:
     elif opcion == "6":
         print("elija una opcion")
         print("0: ver lista de empresas")
-        print("1: agregar un pedido")
-        print("2: eliminar un pedido")
-        print("3: ver lista de pedidos")
+
         opcion6 = input()
     elif opcion == "7":
         seguir = False

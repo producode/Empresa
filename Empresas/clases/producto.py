@@ -1,18 +1,18 @@
 from .material import materiales
-from .categoria import categorias
 
 class productos(object):
+    idProducto = 0
     Nombre = ""
     Coste = 0
     Descripcion = ""
-    Categoria = categorias
+    Categoria = ""
     material = []
 
     def setProducto(self,nombre,coste,descripcion,idCategoria):
         self.Nombre = nombre
         self.Coste = coste
         self.Descripcion = descripcion
-        self.IdCategoria = idCategoria
+        self.Categoria = idCategoria
 
     def AgregarMaterial(self,materiale):
         self.material.append(materiale)
