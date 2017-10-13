@@ -76,7 +76,7 @@ def listarEmpleados2(): #busca el numero de la empresa segun el abrUniversal, po
         return i
     else:
         return 0
-def modifcarEmpleado2(nombre,superior,sueldo):
+def modificarEmpleado2(nombre,superior,sueldo):
     for o in empresa[listarEmpleados2()].Empleados:
         if o.nombre == nombre:
             o.superior = superior
@@ -208,6 +208,18 @@ def listarEmpleados():
                            title='Home',
                            posts=empresa[listarEmpleados2()].Empleados)
 @app.route('/')
+@app.route('/ingresarAccionista')
+def ingresarAccionistas():
+    if request.method == 'POST':
+        ingresarAccionista2(request.form['nombre'],request.form['cantidadAcciones'])
+    return render_template("ingresarAccionista.html")
+@app.route('/')
+@app.route('/modificarEmpleado')
+def modificarEmpleado():
+    if request.method == 'POST':
+        modificarEmpleado2(request.form['nombre'],request.form['superior'],request.form['sueldo'])
+    return render_template("modificarEmpleado.html")
+@app.route('/')
 @app.route('/listarAccionistas', methods=['GET','POST'])
 def listarAccionistas():
     return render_template("listarAccionistas.html",
@@ -267,6 +279,30 @@ def listarMaterialess():
     return render_template("listarMaterialess",
                            title='Home',
                            posts=fabbricantes[elegirFabricane(fabUniversal)].materiale)
+@app.route('/')
+@app.route('/eliminarEmpleado')
+def eliminarEmpleado():
+    if request.method == 'POST':
+        eliminarEmpleado2(request.form['nombre'])
+    return render_template("eliminarEmpleado.html")
+@app.route('/')
+@app.route('/modificarAccionista')
+def modificarAccionista():
+    if request.method == 'POST':
+        modificarAccionista2(request.form['nombre'],request.form['cantidad'])
+    return render_template("modificarAccionista.html")
+@app.route('/')
+@app.route('/eliminarAccionista')
+def eliminarAccionista():
+    if request.method == 'POST':
+        eliminarAccionista2(request.form['nombre'])
+    return render_template("eliminarAccionista.html")
+@app.route('/')
+@app.route('/ingresarCompra')
+def ingresarCompra():
+    if request.method == 'POST':
+        insertarCompra2(request.form['abreviatura'],request.form['nombre'],request.form['cantidad'])
+    return render_template("ingresarCompra.html")
 
 app.run(debug=True)
 
@@ -305,18 +341,18 @@ while seguir:
         print("0: ver lista de empresas -+-")
         print("1: agregar una empresa -+-")
         print("2: agregar empleados -+")
-        print("3: agregar accionista -")
+        print("3: agregar accionista -+")
         print("4: ver lista de empleados -+")
         print("5: ver lista de accionistas -+")
-        print("6: modificar sueldo empleado -")
-        print("7: modificar superior empleado -")
-        print("8: eliminar empleado -")
-        print("9: modificar cantidad de acciones de accionista -")
-        print("10: eliminar accionista -")
+        print("6: modificar sueldo empleado -+")
+        print("7: modificar superior empleado -+")
+        print("8: eliminar empleado -+")
+        print("9: modificar cantidad de acciones de accionista -+")
+        print("10: eliminar accionista -+")
     elif opcion == "3":
         print("elija una opcion")
         print("0: ver lista de empresas -+-")
-        print("1: agregar una compra -")
+        print("1: agregar una compra -+")
         print("2: historial de compras -+")
     elif opcion == "4":
         print("elija una opcion")

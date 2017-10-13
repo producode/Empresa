@@ -1,0 +1,66 @@
+<head>
+<style>
+p {
+	color: black;
+    font-family: calibri;
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+}
+body {
+  margin: 0 auto;
+  background-color: powderblue;
+  padding: 0 20px 20px 20px;
+}h1 {
+    color: blue;
+    font-family: verdana;
+    font-size: 300%;
+    text-align: center;
+}
+input {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+th {
+	color: green;
+	text-align: center;
+}
+table {
+	text-align: center;
+	}
+</style>
+</head>
+<body>
+	<h1>modificar empleado</h1>
+    <form action="/modificarEmpleado" method="post" name="login">
+    	<table>
+    		<tr>
+    			<th><center><p aling = "center">nombre</p></center></th>
+    			<th><input type="text" value="" id="nombre" name="nombre"></p>
+    			</th>
+    		</tr>
+			<tr>
+    			<th><center><p aling = "center">superior</p></center></th>
+    			<th><input type="text" value="" id="superior" name="superior"></p>
+    			</th>
+    		</tr>
+            <tr>
+    			<th><center><p aling = "center">sueldo</p></center></th>
+    			<th><input type="text" value="" id="sueldo" name="sueldo"></p>
+    			</th>
+    		</tr>
+    	</table>
+        <input type="submit" value="subir">
+    </form>
+	<form action="/principal">
+		<input type="submit" value="volver" />
+	</form>
+</body>
