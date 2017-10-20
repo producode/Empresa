@@ -42,25 +42,25 @@ class empresas(companias):
                 del self.Pedidos[i]
                 break
             i = i + 1
-    def eliminarEmpleado(self,nombre):
+    def eliminarEmpleado(self,cuit):
         i = 0
         for o in self.Empleados:
-            if o.nombre == nombre:
+            if o.cuit == cuit:
                 del self.Empleados[i]
                 break
             i = i + 1
 
-    def eliminarAccionista(self,nombre):
+    def eliminarAccionista(self,cuit):
         i = 0
         for o in self.accionistas:
-            if o.nombre == nombre:
+            if o.cuit == cuit:
                 del self.accionistas[i]
                 break
             i = i + 1
-    def modificarAcciones(self,nombre,cantidad):
+    def modificarAcciones(self,cuit,cantidad):
         i = 0
         for o in self.accionistas:
-            if o.nombre == nombre:
+            if o.cuit == cuit:
                 self.accionistas[i].cantidadAcciones = cantidad
                 break
             i = i + 1

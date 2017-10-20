@@ -39,21 +39,31 @@ table {
 </style>
 </head>
 <body>
-	<h1>cambiar numero de acciones de un accionista</h1>
-    <form action="/modificarAccionista" method="post" name="login">
+	<h1>agregar producto</h1>
+    <form action="/ingresarProducto" method="post" name="login">
     	<table>
-    		<tr>
-    			<th><center><p aling = "center">CUIT/CUIL</p></center></th>
-    			<th><input type="text" value="" id="cuit" name="cuit"></p>
+			<tr>
+    			<th><center><p aling = "center">nombre</p></center></th>
+    			<th><input type="text" value="" id="nombre" name="nombre"></p>
     			</th>
     		</tr>
-			<tr>
-    			<th><center><p aling = "center">cantidad de acciones</p></center></th>
-    			<th><input type="text" value="" id="cantidad" name="cantidad"></p>
+            <tr>
+    			<th><center><p aling = "center">coste</p></center></th>
+    			<th><input type="text" value="" id="coste" name="coste"></p>
+    			</th>
+    		</tr>
+            <tr>
+    			<th><center><p aling = "center">descripcion</p></center></th>
+    			<th><input type="text" value="" id="descripcion" name="descripcion"></p>
+    			</th>
+    		</tr>
+            <tr>
+    			<th><center><p aling = "center">categoria</p></center></th>
+    			<th><input type="text" value="" id="categoria" name="categoria"></p>
     			</th>
     		</tr>
     	</table>
-        <th><input type="submit" value="subir"></th>
+        <input type="submit" value="subir">
     </form>
 	<form action="/principal">
 		<input type="submit" value="volver" />

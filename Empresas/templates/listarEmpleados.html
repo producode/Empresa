@@ -42,7 +42,7 @@ table {
     <body>
     <h1>Empleados</h1>
         {% for post in posts %}
-        <div><p>Nombre: <b>{{ post.nombre }}</b> Ingreso: <b>{{ post.fechaIngreso }}</b> profesion: <b>{{ post.Profesion }}</b> superior: <b>{{ post.superior }}</b> sueldo: <b>{{ post.sueldo }}</b></p></div>
+        <div><p>Nombre: <b>{{ post.nombre }}</b> CUIT: <b>{{ post.cuit }}</b> Ingreso: <b>{{ post.fechaIngreso }}</b> profesion: <b>{{ post.Profesion }}</b> superior: <b>{{ post.superior }}</b> sueldo: <b>{{ post.sueldo }}</b></p></div>
         {% endfor %}
         <form action="/principal">
             <input type="submit" value="volver" />
