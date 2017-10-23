@@ -87,7 +87,6 @@ def ingresarCompra2(fabricante,material,cantidad):
             empresa[listarEmpleados2()].agregarCompra(nuevaCompra)
     for item in cursor:
         print(item)
-    cursor = db.empresa.delete_many({"nombre": nombre})
 def ingresarFabricante2(nombre,rublo,abreviatura):
     result = db.fabricante.insert_one({"nombre": nombre, "rublo": rublo, "abreviatura": abreviatura})
     result.inserted_id
