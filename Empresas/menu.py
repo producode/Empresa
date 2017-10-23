@@ -1,13 +1,13 @@
 from datetime import datetime
 from datetime import date
-from Empresa.Empresas.clases.empresa import empresas
-from Empresa.Empresas.clases.fabricante import fabricantes
-from Empresa.Empresas.clases.categoria import categorias
-from Empresa.Empresas.clases.empleado import empleados
-from Empresa.Empresas.clases.accionista import accionistas
-from Empresa.Empresas.clases.compra import compras
-from Empresa.Empresas.clases.usuario import usuarios
-from Empresa.Empresas.clases.producto import productos
+from Empresas.clases.empresa import empresas
+from Empresas.clases.fabricante import fabricantes
+from Empresas.clases.categoria import categorias
+from Empresas.clases.empleado import empleados
+from Empresas.clases.accionista import accionistas
+from Empresas.clases.compra import compras
+from Empresas.clases.usuario import usuarios
+from Empresas.clases.producto import productos
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -24,18 +24,18 @@ client = MongoClient('localhost', 27017)
 db = client.test_database
 collection = db.test_collection
 
+
 def ingresarEmpresa2(nombre,rublo,abreviatura):
     nuevaEmpresa = empresas()
     result = db.empresa.insert_one({"nombre": nombre,"rublo": rublo,"abreviatura": abreviatura})
     result.inserted_id
-    cursor = db.empresa.find().pretty()
+    cursor = db.empresa.find()
     nuevaEmpresa.Nombre = nombre
     nuevaEmpresa.Rublo = rublo
     nuevaEmpresa.Abreviatura = abreviatura
     empresa.append(nuevaEmpresa)
     for item in cursor:
         print(item)
-    cursor = db.empresa.delete_many({"nombre":nombre})
 def ingresar2(nickname,password):
     for item in cliente:
         if(nickname == item.nickname and password == item.contrasena):
@@ -48,42 +48,71 @@ def registrarse2(nickname,password,empresasociada):
     cliente.append(nuevoUsuario)
 def ingresarEmpleado2(cuit,nombre,profesion,superior,sueldo):
     nuevoEmpleado = empleados()
+    result = db.empleado.insert_one({"cuit": cuit,"nombre": nombre,"fecha de ingreso": datetime.now(),"profesion": profesion, "superior": superior, "sueldo": sueldo})
+    result.inserted_id
+    cursor = db.empleado.find()
     nuevoEmpleado.cuit = cuit
     nuevoEmpleado.nombre = nombre
     nuevoEmpleado.fechaIngreso = datetime.now()
     nuevoEmpleado.Profesion = profesion
     nuevoEmpleado.superior = superior
     nuevoEmpleado.sueldo = sueldo
+    for item in cursor:
+        print(item)
     empresa[listarEmpleados2()].agregarEmpleado(nuevoEmpleado)
 def ingresarAccionista2(cuit,nombre,cantidad):
-    if a == True:
-        nuevoAccionista = accionistas()
-        nuevoAccionista.cuit = cuit
-        nuevoAccionista.nombre = nombre
-        nuevoAccionista.fechaIngreso = datetime.now()
-        nuevoAccionista.cantidadAcciones = cantidad
-        empresa[listarEmpleados2()].agregarAccionista(nuevoAccionista)
+    result = db.accionista.insert_one({"cuit": cuit,"nombre": nombre,"fecha de ingreso": datetime.now(),"cantidad de acciones": cantidad})
+    result.inserted_id
+    cursor = db.accionista.find()
+    nuevoAccionista = accionistas()
+    nuevoAccionista.cuit = cuit
+    nuevoAccionista.nombre = nombre
+    nuevoAccionista.fechaIngreso = datetime.now()
+    nuevoAccionista.cantidadAcciones = cantidad
+    for item in cursor:
+        print(item)
+    empresa[listarEmpleados2()].agregarAccionista(nuevoAccionista)
 def ingresarCompra2(fabricante,material,cantidad):
     nuevaCompra = compras()
     nuevaCompra.idCompra = empresa[listarEmpleados2()].obtenerIdCompra()
     nuevaCompra.Fecha = datetime.now()
     for item2 in fabbricantes[elegirFabricane(fabricante)].materiale:
         if item2.Nombre == material:
+            result = db.compra.insert_one({"idCompra": empresa[listarEmpleados2()].obtenerIdCompra() ,"fecha de compra": datetime.now(),"material": item2.Nombre, "cantidad": int(cantidad), "precio": (nuevaCompra.cantidad * nuevaCompra.material.Precio)})
+            result.inserted_id
+            cursor = db.compra.find()
             nuevaCompra.material = item2
             nuevaCompra.cantidad = int(cantidad)
             nuevaCompra.Precio = (nuevaCompra.cantidad * nuevaCompra.material.Precio)
             empresa[listarEmpleados2()].agregarCompra(nuevaCompra)
-    ingresarFabricante2
+    for item in cursor:
+        print(item)
+    cursor = db.empresa.delete_many({"nombre": nombre})
 def ingresarFabricante2(nombre,rublo,abreviatura):
+    result = db.fabricante.insert_one({"nombre": nombre, "rublo": rublo, "abreviatura": abreviatura})
+    result.inserted_id
+    cursor = db.fabricante.find()
     nuevoFabricante = fabricantes()
     nuevoFabricante.Nombre = nombre
     nuevoFabricante.Rublo = rublo
     nuevoFabricante.Abreviatura = abreviatura
+    for item in cursor:
+        print(item)
     fabbricantes.append(nuevoFabricante)
 def ingresarMaterial2(abreviatura,nombre,precio,um):
     fabbricantes[elegirFabricane(abreviatura)].crearMaterial(nombre, precio, um)
+    result = db.material.insert_one({"nombre": nombre, "precio": precio, "unidad de medicion": um})
+    result.inserted_id
+    cursor = db.material.find()
+    for item in cursor:
+        print(item)
 def ingresarProducto2(nombre,Coste,Descripcion,categoria,material):
     nuevoproducto = productos()
+    result = db.producto.insert_one({"idProducto": empresa[listarEmpleados2()].obtenerIdPedido(),"nombre": nombre, "coste": Coste, "descripcion": Descripcion,"categoria": categoria,"material": material})
+    result.inserted_id
+    cursor = db.producto.find()
+    for item in cursor:
+        print(item)
     nuevoproducto.Nombre = nombre
     nuevoproducto.Coste = Coste
     nuevoproducto.Descripcion = Descripcion
