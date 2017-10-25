@@ -46,9 +46,9 @@ def registrarse2(nickname,password,empresasociada):
     nuevoUsuario.contrasena = password
     nuevoUsuario.empresaAsociada = empresasociada
     cliente.append(nuevoUsuario)
-def ingresarEmpleado2(cuit,nombre,profesion,superior,sueldo):
+def ingresarEmpleado2(cuit,nombre,profesion,superior,sueldo,abreviatura):
     nuevoEmpleado = empleados()
-    result = db.empleado.insert_one({"cuit": cuit,"nombre": nombre,"fecha de ingreso": datetime.now(),"profesion": profesion, "superior": superior, "sueldo": sueldo})
+    result = db.empleado.insert_one({"cuit": cuit,"nombre": nombre,"empresa": abreviatura, "fecha de ingreso": datetime.now(),"profesion": profesion, "superior": superior, "sueldo": sueldo})
     result.inserted_id
     cursor = db.empleado.find()
     nuevoEmpleado.cuit = cuit
@@ -59,9 +59,9 @@ def ingresarEmpleado2(cuit,nombre,profesion,superior,sueldo):
     nuevoEmpleado.sueldo = sueldo
     for item in cursor:
         print(item)
-    empresa[listarEmpleados2()].agregarEmpleado(nuevoEmpleado)
-def ingresarAccionista2(cuit,nombre,cantidad):
-    result = db.accionista.insert_one({"cuit": cuit,"nombre": nombre,"fecha de ingreso": datetime.now(),"cantidad de acciones": cantidad})
+    empresa[encontrarEmpresa(abreviatura)].agregarEmpleado(nuevoEmpleado)
+def ingresarAccionista2(cuit,nombre,cantidad,abreviatura):
+    result = db.accionista.insert_one({"empresa":abreviatura, "cuit": cuit,"nombre": nombre,"fecha de ingreso": datetime.now(),"cantidad de acciones": cantidad})
     result.inserted_id
     cursor = db.accionista.find()
     nuevoAccionista = accionistas()
@@ -71,20 +71,20 @@ def ingresarAccionista2(cuit,nombre,cantidad):
     nuevoAccionista.cantidadAcciones = cantidad
     for item in cursor:
         print(item)
-    empresa[listarEmpleados2()].agregarAccionista(nuevoAccionista)
-def ingresarCompra2(fabricante,material,cantidad):
+    empresa[encontrarEmpresa(abreviatura)].agregarAccionista(nuevoAccionista)
+def ingresarCompra2(fabricante,material,cantidad,abreviatura):
     nuevaCompra = compras()
-    nuevaCompra.idCompra = empresa[listarEmpleados2()].obtenerIdCompra()
+    nuevaCompra.idCompra = empresa[encontrarEmpresa(abreviatura)].obtenerIdCompra()
     nuevaCompra.Fecha = datetime.now()
     for item2 in fabbricantes[elegirFabricane(fabricante)].materiale:
         if item2.Nombre == material:
-            result = db.compra.insert_one({"idCompra": empresa[listarEmpleados2()].obtenerIdCompra() ,"fecha de compra": datetime.now(),"material": item2.Nombre, "cantidad": int(cantidad), "precio": (nuevaCompra.cantidad * nuevaCompra.material.Precio)})
+            result = db.compra.insert_one({"empresa":abreviatura, "idCompra": nuevaCompra.idCompra ,"fecha de compra": datetime.now(),"material": item2.Nombre, "cantidad": int(cantidad), "precio": (nuevaCompra.cantidad * nuevaCompra.material.Precio)})
             result.inserted_id
             cursor = db.compra.find()
             nuevaCompra.material = item2
             nuevaCompra.cantidad = int(cantidad)
             nuevaCompra.Precio = (nuevaCompra.cantidad * nuevaCompra.material.Precio)
-            empresa[listarEmpleados2()].agregarCompra(nuevaCompra)
+            empresa[encontrarEmpresa(abreviatura)].agregarCompra(nuevaCompra)
     for item in cursor:
         print(item)
 def ingresarFabricante2(nombre,rublo,abreviatura):
@@ -105,20 +105,22 @@ def ingresarMaterial2(abreviatura,nombre,precio,um):
     cursor = db.material.find()
     for item in cursor:
         print(item)
-def ingresarProducto2(nombre,Coste,Descripcion,categoria,material):
+def ingresarProducto2(nombre,Coste,Descripcion,categoria,material,abreviatura):
     nuevoproducto = productos()
-    result = db.producto.insert_one({"idProducto": empresa[listarEmpleados2()].obtenerIdPedido(),"nombre": nombre, "coste": Coste, "descripcion": Descripcion,"categoria": categoria,"material": material})
-    result.inserted_id
-    cursor = db.producto.find()
-    for item in cursor:
-        print(item)
     nuevoproducto.Nombre = nombre
     nuevoproducto.Coste = Coste
     nuevoproducto.Descripcion = Descripcion
     nuevoproducto.Categoria = categoria
     nuevoproducto.material = material
-    nuevoproducto.idProducto = empresa[listarEmpleados2()].obtenerIdPedido()
+    nuevoproducto.idProducto = empresa[encontrarEmpresa(abreviatura)].obtenerIdPedido()
     empresa[listarEmpleados2()].Productos.append(nuevoproducto)
+    result = db.producto.insert_one(
+        {"empresa": abreviatura,"idProducto": nuevoproducto.idProducto, "nombre": nombre, "coste": Coste,
+         "descripcion": Descripcion, "categoria": categoria, "material": material})
+    result.inserted_id
+    cursor = db.producto.find()
+    for item in cursor:
+        print(item)
 def listarEmpleados2(): #busca el numero de la empresa segun el abrUniversal, por lo que se puede usar para cualquier cosa que lo requiera.
     a = False
     i = 0
@@ -131,16 +133,29 @@ def listarEmpleados2(): #busca el numero de la empresa segun el abrUniversal, po
         return i
     else:
         return 0
+
+def encontrarEmpresa(abreviatura):  # busca el numero de la empresa segun el abrUniversal, por lo que se puede usar para cualquier cosa que lo requiera.
+    a = False
+    i = 0
+    for o in empresa:
+        if o.Abreviatura == abreviatura:
+            a = True
+            break
+        i = i + 1
+    if a:
+        return i
+    else:
+        return 0
 def listarMateriales2(abreviatura):
     fabUniversal = abreviatura
-def modificarEmpleado2(cuit,superior,sueldo):
-    for o in empresa[listarEmpleados2()].Empleados:
+def modificarEmpleado2(cuit,superior,sueldo,abreviatura):
+    for o in empresa[encontrarEmpresa(abreviatura)].Empleados:
         if o.cuit == cuit:
             o.superior = superior
             o.sueldo = sueldo
             break
-def modificarAccionista2(cuit,cantidad):
-    empresa[listarEmpleados2()].modificarAcciones(cuit, cantidad)
+def modificarAccionista2(cuit,cantidad,abreviatura):
+    empresa[encontrarEmpresa(abreviatura)].modificarAcciones(cuit, cantidad)
 def modificarMaterial2(abreviatura,nombre,precio):
     for item in fabbricantes[elegirFabricane(abreviatura)].materiale:
         if item.Nombre == nombre:
@@ -229,13 +244,13 @@ def ingresarFabricante():
 @app.route('/ingresarAccionista', methods=['GET','POST'])
 def ingresarAccionistas():
     if request.method == 'POST':
-        ingresarAccionista2(request.form['cuit'],request.form['nombre'],request.form['cantidadAcciones'])
+        ingresarAccionista2(request.form['cuit'],request.form['nombre'],request.form['cantidadAcciones'],request.form['abreviatura'])
     return render_template("ingresarAccionista.html")
 @app.route('/')
 @app.route('/ingresarEmpleado', methods=['GET','POST'])
 def ingresarEmpleado():
     if request.method == 'POST':
-        ingresarEmpleado2(request.form['cuit'],request.form['nombre'],request.form['profesion'], request.form['superior'],request.form['sueldo'])
+        ingresarEmpleado2(request.form['cuit'],request.form['nombre'],request.form['profesion'], request.form['superior'],request.form['sueldo'],request.form['abreviatura'])
     return render_template("ingresarEmpleado.html")
 @app.route('/')
 @app.route('/ingresarMaterial', methods=['GET','POST'])
@@ -247,13 +262,13 @@ def ingresarMaterial():
 @app.route('/ingresarCompra', methods=['GET','POST'])
 def ingresarCompra():
     if request.method == 'POST':
-        ingresarCompra2(request.form['abreviatura'],request.form['nombre'],request.form['cantidad'])
+        ingresarCompra2(request.form['abreviatura'],request.form['nombre'],request.form['cantidad'],request.form['abreviaturaEmpresa'])
     return render_template("ingresarCompra.html")
 @app.route('/')
 @app.route('/ingresarProducto', methods=['GET','POST'])
 def ingresarProducto():
     if request.method == 'POST':
-        ingresarProducto(request.form['nombre'],request.form['coste'],request.form['descripcion'],request.form['categoria'])
+        ingresarProducto2(request.form['nombre'],request.form['coste'],request.form['descripcion'],request.form['categoria'],request.form['abreviatura'])
     return render_template("ingresarProducto.html")
 @app.route('/')
 @app.route('/listarEmpresas', methods=['GET','POST'])
@@ -303,7 +318,7 @@ def listarMaterialess():
 @app.route('/modificarEmpleado', methods=['GET','POST'])
 def modificarEmpleado():
     if request.method == 'POST':
-        modificarEmpleado2(request.form['cuit'],request.form['superior'],request.form['sueldo'])
+        modificarEmpleado2(request.form['cuit'],request.form['superior'],request.form['sueldo'],request.form['abreviatura'])
     return render_template("modificarEmpleado.html")
 @app.route('/')
 @app.route('/modificarMaterial', methods=['GET','POST'])
@@ -315,7 +330,7 @@ def modificarMaterial():
 @app.route('/modificarAccionista', methods=['GET','POST'])
 def modificarAccionista():
     if request.method == 'POST':
-        modificarAccionista2(request.form['cuit'],request.form['cantidad'])
+        modificarAccionista2(request.form['cuit'],request.form['cantidad'],request.form['abreviatura'])
     return render_template("modificarAccionista.html")
 @app.route('/')
 @app.route('/eliminarFabricante', methods=['GET','POST'])
