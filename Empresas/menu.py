@@ -153,17 +153,21 @@ def modificarEmpleado2(cuit,superior,sueldo,abreviatura):
         if o.cuit == cuit:
             o.superior = superior
             o.sueldo = sueldo
+            cursor = db.empleado.update({"cuit":cuit},{"cuit":cuit,"nombre":o.nombre,"empresa":abreviatura,"fecha de ingreso":o.fechaIngreso,"profesion":o.Profesion,"superior":o.superior,"sueldo":o.sueldo})
             break
 def modificarAccionista2(cuit,cantidad,abreviatura):
+    newac = accionistas()
     empresa[encontrarEmpresa(abreviatura)].modificarAcciones(cuit, cantidad)
 def modificarMaterial2(abreviatura,nombre,precio):
     for item in fabbricantes[elegirFabricane(abreviatura)].materiale:
         if item.Nombre == nombre:
             item.Precio = precio
-def eliminarEmpleado2(cuit):
-    empresa[listarEmpleados2()].eliminarEmpleado(cuit)
-def eliminarAccionista2(cuit):
-    empresa[listarEmpleados2()].eliminarAccionista(cuit)
+def eliminarEmpleado2(cuit,abreviatura):
+    cursor = db.empleado.delete_one({"cuit":cuit})
+    empresa[encontrarEmpresa(abreviatura)].eliminarEmpleado(cuit)
+def eliminarAccionista2(cuit,abreviatura):
+    cursor = db.accionista.delete_one({"cuit":cuit})
+    empresa[encontrarEmpresa(abreviatura)].eliminarAccionista(cuit)
 def eliminarFabricante2(nombre):
     del fabbricantes[elegirFabricane(nombre)]
 def eliminarMaterial2(abreviatura,nombre):
@@ -348,13 +352,13 @@ def eliminarMaterial():
 @app.route('/eliminarEmpleado', methods=['GET','POST'])
 def eliminarEmpleado():
     if request.method == 'POST':
-        eliminarEmpleado2(request.form['cuit'])
+        eliminarEmpleado2(request.form['cuit'],request.form['abreviatura'])
     return render_template("eliminarEmpleado.html")
 @app.route('/')
 @app.route('/eliminarAccionista', methods=['GET','POST'])
 def eliminarAccionista():
     if request.method == 'POST':
-        eliminarAccionista2(request.form['cuit'])
+        eliminarAccionista2(request.form['cuit'],request.form['abreviatura'])
     return render_template("eliminarAccionista.html")
 @app.route('/')
 @app.route('/verFabricante', methods=['GET','POST'])
